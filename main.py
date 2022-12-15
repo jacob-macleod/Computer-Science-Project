@@ -3,7 +3,7 @@ from loginHandler import *
 from validateTextFields import *
 # Debug credentials: username = j, password = password123
 
-app = Flask('app')
+app = Flask('app', static_url_path='/static')
 
 
 # Load dashboard page
@@ -91,15 +91,6 @@ def signUp() :
         # If not, the page is reloaded with feedback
     # Return the sign up page
     return render_template("signUp.html", firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, passwordFeedbackText=passwordFeedbackText, usernameFeedbackText=usernameFeedbackText, farmNameFeedbackText=farmNameFeedbackText)
-
-# Return the main css file when requested
-@app.route("/cssFile")
-def cssFile():
-    return render_template("file.css", image="signInImage")
-
-@app.route("/generatePassword.js")
-def generatePasswordPage():
-    return render_template("generatePassword.js")
 
 # Return the sign in image when requested
 @app.route("/signInImage")
