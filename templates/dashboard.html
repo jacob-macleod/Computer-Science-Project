@@ -11,20 +11,16 @@
 <body>
     
         <div id="banner">
-            <div id="leftSideOfBanner">
                 <div id="selectedMenuItem" style="display: inline-block;">
                     Dashboard
                 </div>   
                 <p id="unselectedMenuItem" style="display: inline-block;">Advanced Graph Settings</p>
                 <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Configure Devices</p>
                 <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Manage Users</p>
-            </div>
-
-            <div id="rightSideOfBanner">
-                <p style="display: inline-block;"> {{ farmName }}</p>
-                <p style="display: inline-block;" name="username"></p>
-                <p style="display: inline-block;" name="adminIndicator">Worker</p>
-            </div>
+                <p id="unselectedMenuItem" style="display: inline-block;">✦</p>
+                <p id="informationMenuItem" style="display: inline-block;"> {{ farmName }}</p>
+                <p id="informationMenuItem" style="display: inline-block;" name="username"></p>
+                <p id="informationMenuItem" style="display: inline-block;" name="adminIndicator">Worker</p>
         </div>
 
      <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
