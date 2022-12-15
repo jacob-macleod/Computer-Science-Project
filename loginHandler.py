@@ -19,15 +19,21 @@ def generateID(fileToRead) :
     # The new user ID is 1 bigger than the highest ID used
     return highestID + 1
 
-# Search a file for a specific value. Return true if found, otherwise return false
-# For example, you could search the owners.csv file for a specifc user
-def searchForValue(valueToFind, fileToSearch, rowToSearch) :
+# Search a file for a username. If found, look for the password belonging to the user. If found, return true, otherwise return false
+# Basically, check if the user entered credentials are correct
+def searchForCredentials(username, fileToSearch, rowToSearch, password) :
     matchFound = False
 
     with open(fileToSearch, 'r') as file:
         for line in file:
-            if decrypt(line.split(",")[rowToSearch]) == valueToFind:
-                matchFound = True
+            print(decrypt(line.split(",")[rowToSearch]))
+            print(username)
+            # If the username is correct
+            if decrypt(line.split(",")[rowToSearch]) == username:
+                # If the password is correct
+                if decrypt(line.split(",")[5]) == password :
+                    matchFound = True
+
 
     return matchFound
 

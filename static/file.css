@@ -4,7 +4,7 @@ body {
 
 #mainContentWrapper {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: auto auto;
 }
 
 #graphsRow1 {

@@ -21,24 +21,21 @@ def dashboard():
         # Sign in stage, no validation or verification checks need to be undertaken
 
         # If the username and passwords match the stored records:
-        if searchForValue(username, "database/owners.csv", 4) == True:
-            if searchForValue(password, "database/owners.csv", 5) == True:
-                # Log the user in
-                # Store username as a cookie and load the dashboard page
-                isAdmin = True
-                dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)))
-                dashboard.set_cookie('username', username)
-                passwordFeedbackText = ""
-                return dashboard
-            else:
-                passwordFeedbackText = "Sorry, your username or password are wrong"
+        if searchForCredentials(username, "database/owners.csv", 4, password) == True:
+            # Log the user in
+            # Store username as a cookie and load the dashboard page
+            isAdmin = True
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)))
+            dashboard.set_cookie('username', username)
+            passwordFeedbackText = ""
+            return dashboard
         else :
             passwordFeedbackText = "Sorry, your username or password are wrong"
             
     # If user is logged in
     if request.cookies.get("username") != None:
         # If the user is the admin
-        if searchForValue(request.cookies.get("username"), "database/owners.csv", 4) == True:
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
         # Load dashboard page
         #print (findValue(request.cookies.get("username"), "database/owners.csv", 4, 1))

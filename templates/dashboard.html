@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/generatePlaceholderData.js"></script>
 </head>
 <body>
     
@@ -116,9 +117,9 @@
         });
     }
 
-    drawChart(document.getElementById("lightLevels"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Light Levels", "#96F3CC", "#BEBBF7")
-    drawChart(document.getElementById("humidity"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Humidity", "#BEBBF7", "#4EA699")
-    drawChart(document.getElementById("temperature"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Temperature", "#7772B1", "#A6CEE3")
-    drawChart(document.getElementById("phLevel"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "PH Level", "#BEBBF7", "#A6CEE3")
-    drawChart(document.getElementById("soilMoisture"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Soil Moisture", "#7772B1", "#A6CEE3")
+    drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Light Levels", "#96F3CC", "#BEBBF7")
+    drawChart(document.getElementById("humidity"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Humidity", "#BEBBF7", "#4EA699")
+    drawChart(document.getElementById("temperature"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Temperature", "#7772B1", "#A6CEE3")
+    drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(100), generatePlaceholderData(100), "PH Level", "#BEBBF7", "#A6CEE3")
+    drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Soil Moisture", "#7772B1", "#A6CEE3")
 </script>
