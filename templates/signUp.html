@@ -1,0 +1,67 @@
+<! DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/cssFile" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src ="/generatePassword.js"></script>
+</head>
+<body>
+    
+        <div id="banner">
+            <p id="unselectedMenuItem" style="display: inline-block;">Dashboard</p>
+            <p id="unselectedMenuItem" style="display: inline-block;">Advanced Graph Settings</p>
+        </div>
+    
+<div id="mainContentWrapper">
+    <div>
+        <img src="static/signUpImage.png">
+    </div>
+    
+    <div>
+        <div>
+            <p id = "header">Sign Up to Create an Account</p>
+            <p id = "normalText">This page lets you sign up to the website. Want to <a id="normalText" href="/">sign in</a> instead?</p>
+            <p id = "subheader"> Your Details </p>
+
+            <form action="{{ url_for("signUp")}}" method="post"> 
+                <p style="display: inline-block;" id = "normalText">First Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="firstName" id = "inputBoxText"></input>
+                <p name="feedbackText" style="display: inline-block;" id="feedbackText">{{ firstNameFeedbackText }}</p>
+                <br>
+                
+                <p style="display: inline-block;" id = "normalText">Last Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="lastName" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ lastNameFeedbackText }}</p>
+                <br>
+                
+                <p style="display: inline-block;" id = "normalText">Username</p>
+                <input style="display: inline-block;" placeholder="Write here" name="username" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ usernameFeedbackText }}</p>
+                <br>
+                
+                <p style="display: inline-block;"  id = "normalText">Password</p>
+                <input style="display: inline-block;" placeholder="********" class="password" name="password" id = "passwordInputBox"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
+                <br>
+
+                <p style="display: inline-block;"  id = "normalText">Password Confirmation</p>
+                <input style="display: inline-block;" placeholder="********" name="passwordConfirmation" id = "passwordConfirmationInputBox"></input>
+                <button type="button" onclick="var password = generatePassword(); document.getElementById('passwordInputBox').value = password; document.getElementById('passwordConfirmationInputBox').value = password;" id="button">Generate a Password</button>
+                <br>
+
+                <p id = "subheader"> Your Farm Details </p>
+                <p style="display: inline-block;" id = "normalText">Farm Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="farmName" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ farmNameFeedbackText }}</p>                
+
+                <br>
+                <button type="submit" id="button">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

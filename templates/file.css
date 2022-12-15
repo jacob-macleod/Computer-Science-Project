@@ -1,0 +1,138 @@
+body {
+    background-color: #FFFFFF;
+}
+
+#mainContentWrapper {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+#banner {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+#unselectedMenuItem {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+
+#selectedMenuItem {
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 4px;
+    padding: 10px;
+    height: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    color: #827F7F;
+    text-align:center;
+    font-family: 'Open Sans';
+    font-weight: 400;
+}
+
+#header {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 44px;
+    color: #000000;
+}
+
+#normalText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: #827F7F;
+}
+
+#feedbackText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: #A6CEE3;
+}
+
+#subheader {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    
+    color: #000000;
+}
+
+#inputBoxText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: #827F7F;
+
+    background: #FFFFFF;
+    border: 0.5px solid #D0D0D0;
+    border-radius: 4px;
+    height: 20px;
+}
+
+#passwordInputBox {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: #827F7F;
+
+    background: #FFFFFF;
+    border: 0.5px solid #D0D0D0;
+    border-radius: 4px;
+    height: 20px;
+}
+
+#passwordConfirmationInputBox {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: #827F7F;
+
+    background: #FFFFFF;
+    border: 0.5px solid #D0D0D0;
+    border-radius: 4px;
+    height: 20px;
+}
+
+::placeholder {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    
+    color: #D0D0D0;
+}
+
+#button {
+    background: #000000;
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    
+    color: #FFFFFF;
+}

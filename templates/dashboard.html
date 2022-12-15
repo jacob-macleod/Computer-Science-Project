@@ -1,0 +1,67 @@
+<! DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/cssFile" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+        <div id="banner">
+            <div id="selectedMenuItem" style="display: inline-block;">
+                Dashboard
+            </div>   
+            <p id="unselectedMenuItem" style="display: inline-block;">Advanced Graph Settings</p>
+            <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Configure Devices</p>
+            <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Manage Users</p>
+
+            <p> {{ farmName }}</p>
+            <p name="username"></p>
+            <p name="adminIndicator">Worker</p>
+        </div>
+
+     <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
+    
+<div id="mainContentWrapper">  
+
+</div>
+</body>
+<script>
+    // Get the value of a cookie by it's name
+    function getCookie(cookieName) {
+        singleCookie = decodeURIComponent(document.cookie).split(";");
+    
+        // Look at every cookie
+        for (i=0;i<singleCookie.length;i++) {
+            // If the cookie's name is right
+            if (singleCookie[i].split("=")[0] == cookieName) {
+                // Return the cookie's value
+                return singleCookie[i].split("=")[1];
+            }
+        }    
+    }
+    
+    // Set up the page
+    isAdmin = "{{ isAdmin }}";
+    document.cookie = "isAdmin={{ isAdmin }}";
+    document.getElementById("firstName").innerHTML = "{{ firstName }}"
+    document.getElementsByName("username")[0].innerHTML = getCookie("username");
+    if (isAdmin == "True") {
+        document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
+        document.getElementsByName("adminIndicator")[0].style = "color: #A6CEE3;";
+    }
+    
+
+    // Some pages are hidden by default. If the user is an admin, show them
+    if (isAdmin == "True") {
+        // Get all the items to hide
+        itemsToHide = document.getElementsByName("restrictedItem");
+        for (i=0;i<itemsToHide.length;i++) {
+            // Change their visibility to hidden
+            itemsToHide[i].style = "display: inline-block; visibility:visible;";
+        }
+    }
+</script>
