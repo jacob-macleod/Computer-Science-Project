@@ -39,6 +39,10 @@ body {
     font-weight: 400;
 }
 
+#unselectedMenuItem:hover {
+    color: #d3d0d0;
+}
+
 #header {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
