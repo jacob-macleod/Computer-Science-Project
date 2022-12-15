@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
@@ -23,7 +24,32 @@
                 <p id="informationMenuItem" style="display: inline-block;" name="adminIndicator">Worker</p>
         </div>
 
-     <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
+        <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
+
+        <div id="graphsRow1">
+            <div style="position: relative; width:70vh; height:40vh;">
+                <canvas  id="lightLevels"></canvas>
+            </div>
+
+            <div style="position: relative; width:70vh; height:40vh;">
+                <canvas id="humidity"></canvas>
+            </div>
+        </div>
+
+        <div id="graphsRow2">
+            <div style="position: relative; width:47vh; height:40vh;">
+                <canvas  id="temperature"></canvas>
+            </div>
+
+            <div style="position: relative; width:47vh; height:40vh;">
+                <canvas id="phLevel"></canvas>
+            </div>
+
+            <div style="position: relative; width:47vh; height:40vh;">
+                <canvas id="soilMoisture"></canvas>
+            </div>
+        </div>
+
     
 <div id="mainContentWrapper">  
 
@@ -64,4 +90,30 @@
             itemsToHide[i].style = "display: inline-block; visibility:visible;";
         }
     }
+
+    // Set up a chart
+    function drawChart(elementToDrawOn, labels, data) {
+    // Set up the light level chart
+    const ctx = elementToDrawOn;
+
+    new Chart(ctx, {
+    type: 'line',
+    data: {
+    labels: labels,
+    datasets: [{
+        label: 'My First Dataset',
+        data: data,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+    }]
+    }
+    });
+    }
+
+    drawChart(document.getElementById("lightLevels"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
+    drawChart(document.getElementById("humidity"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
+    drawChart(document.getElementById("temperature"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
+    drawChart(document.getElementById("phLevel"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
+    drawChart(document.getElementById("soilMoisture"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
 </script>
