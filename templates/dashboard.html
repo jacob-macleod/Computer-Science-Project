@@ -92,28 +92,33 @@
     }
 
     // Set up a chart
-    function drawChart(elementToDrawOn, labels, data) {
-    // Set up the light level chart
-    const ctx = elementToDrawOn;
+    function drawChart(elementToDrawOn, labels, data, name, color1, color2) {
+        // Set up the light level chart
+        const ctx = elementToDrawOn;
+        
+        // Create gradient
+        let gradient = ctx.getContext('2d').createLinearGradient(0, 0, 400, 0);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
 
-    new Chart(ctx, {
-    type: 'line',
-    data: {
-    labels: labels,
-    datasets: [{
-        label: 'My First Dataset',
-        data: data,
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-    }]
-    }
-    });
+        new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: labels,
+        datasets: [{
+            label: name,
+            data: data,
+            fill: false,
+            borderColor: gradient,
+            tension: 0.05
+        }]
+        }
+        });
     }
 
-    drawChart(document.getElementById("lightLevels"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
-    drawChart(document.getElementById("humidity"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
-    drawChart(document.getElementById("temperature"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
-    drawChart(document.getElementById("phLevel"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
-    drawChart(document.getElementById("soilMoisture"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40])
+    drawChart(document.getElementById("lightLevels"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Light Levels", "#96F3CC", "#BEBBF7")
+    drawChart(document.getElementById("humidity"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Humidity", "#BEBBF7", "#4EA699")
+    drawChart(document.getElementById("temperature"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Temperature", "#7772B1", "#A6CEE3")
+    drawChart(document.getElementById("phLevel"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "PH Level", "#BEBBF7", "#A6CEE3")
+    drawChart(document.getElementById("soilMoisture"), [65, 59, 80, 81, 56, 55, 40], [65, 59, 80, 81, 56, 55, 40], "Soil Moisture", "#7772B1", "#A6CEE3")
 </script>
