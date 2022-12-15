@@ -11,16 +11,20 @@
 <body>
     
         <div id="banner">
-            <div id="selectedMenuItem" style="display: inline-block;">
-                Dashboard
-            </div>   
-            <p id="unselectedMenuItem" style="display: inline-block;">Advanced Graph Settings</p>
-            <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Configure Devices</p>
-            <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Manage Users</p>
+            <div id="leftSideOfBanner">
+                <div id="selectedMenuItem" style="display: inline-block;">
+                    Dashboard
+                </div>   
+                <p id="unselectedMenuItem" style="display: inline-block;">Advanced Graph Settings</p>
+                <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Configure Devices</p>
+                <p id="unselectedMenuItem" name="restrictedItem" style="display: inline-block; visibility:hidden;">Manage Users</p>
+            </div>
 
-            <p> {{ farmName }}</p>
-            <p name="username"></p>
-            <p name="adminIndicator">Worker</p>
+            <div id="rightSideOfBanner">
+                <p style="display: inline-block;"> {{ farmName }}</p>
+                <p style="display: inline-block;" name="username"></p>
+                <p style="display: inline-block;" name="adminIndicator">Worker</p>
+            </div>
         </div>
 
      <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
@@ -51,7 +55,7 @@
     document.getElementsByName("username")[0].innerHTML = getCookie("username");
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
-        document.getElementsByName("adminIndicator")[0].style = "color: #A6CEE3;";
+        document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
     }
     
 

@@ -33,7 +33,7 @@ def dashboard():
             else:
                 passwordFeedbackText = "Sorry, your username or password are wrong"
         else :
-                passwordFeedbackText = "Sorry, your username or password are wrong"
+            passwordFeedbackText = "Sorry, your username or password are wrong"
             
     # If user is logged in
     if request.cookies.get("username") != None:

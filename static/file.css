@@ -10,6 +10,8 @@ body {
 #banner {
     white-space: nowrap;
     overflow-x: auto;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 #unselectedMenuItem {
