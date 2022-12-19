@@ -26,8 +26,6 @@ def searchForCredentials(username, fileToSearch, rowToSearch, password) :
 
     with open(fileToSearch, 'r') as file:
         for line in file:
-            print(decrypt(line.split(",")[rowToSearch]))
-            print(username)
             # If the username is correct
             if decrypt(line.split(",")[rowToSearch]) == username:
                 # If the password is correct
