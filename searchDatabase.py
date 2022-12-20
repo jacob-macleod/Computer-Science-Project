@@ -95,3 +95,40 @@ def findDataloggersOwnedByFarmID(farmID) :
     
     return dataloggers
 
+
+# Get the data for a specifc data logger for a specific category over a specific time period
+def getDataForTimePeriod (dataloggerID, category, startDate, endDate) :
+    # Convert the start and end dates to date time format
+    startDate = datetime.strptime(startDate, "%d/%m/%Y")
+    endDate = datetime.strptime(endDate, "%d/%m/%Y")
+
+    data = []
+    individualdataPoints = ""
+
+    # Turn the start and end dates into a list of dates in between, inclusive
+    dates = [startDate + timedelta(days=x) for x in range(0, ((endDate + timedelta(1))-startDate).days)]
+
+    # For each date found
+    for day in dates:
+        # Get the list of data values as an array
+        dailyDataValues = loadDataForSpecificDay(day.strftime("%d/%m/%Y"), dataloggerID)
+        # Append each item in this array to the data array
+        for i in range(0, len(dailyDataValues)):
+            data.append(dailyDataValues[i])
+
+    if category == "lightLevels" :
+        collumn = 1
+    elif category == "humidiTy" :
+        collumn = 2
+    elif category == "temperature":
+        collumn = 3
+    elif category == "phLevel" :
+        collumn = 4
+    else:
+        collumn = 5
+
+    for i in range(0, len(data)) :
+        individualdataPoints = individualdataPoints + data[i].split(",")[collumn] + ","
+
+    return individualdataPoints
+

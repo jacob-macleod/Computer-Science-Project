@@ -1,3 +1,4 @@
+from unicodedata import category
 from flask import Flask, request, render_template, make_response
 from loginHandler import *
 from validateTextFields import *
@@ -60,7 +61,18 @@ def advancedSettings () :
         dataloggerID = getDataloggerID(dataloggerName)
         data = loadAndFormatDataForSpecificDay(day, dataloggerID)'''
 
-        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
+        # If arguments have been supplied
+        if request.args.get("datalogger") != "":
+            # Save the results of the arguments
+            dataloggerName = request.args.get("datalogger")
+            category = request.args.get("category")
+            startDate = request.args.get("start")
+            endDate = request.args.get("end")
+            dataloggerID = getDataloggerID(dataloggerName)
+
+            data = getDataForTimePeriod (dataloggerID, category, startDate, endDate)
+            
+        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), data=data)
     else :
         # If the user is not logged in load the sign in page
         return render_template("signIn.html")

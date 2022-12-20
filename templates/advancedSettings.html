@@ -24,8 +24,9 @@
                 <p id="informationMenuItem" style="display: inline-block;" name="username"></p>
                 <p id="informationMenuItem" style="display: inline-block;" name="adminIndicator">Worker</p>
         </div>
-
-        <canvas  id="graph"></canvas>
+        <div style="height: 70vh;">
+            <canvas  id="graph"></canvas>
+        </div>
         <p id="header">Select Your Data</p>
         <p id="normalText">View more specific graphs based on a single data category</p>
         <br>
@@ -33,7 +34,7 @@
         <select syle="display:inline-block;" id="dataloggerSelector"></select>
         <br>
         <label id="normalText" syle="display:inline-block;">Data Category: </label>
-        <select syle="display:inline-block; id="categorySelector">
+        <select syle="display:inline-block;" id="categorySelector">
             <option value="lightLevels">Light Levels</option>
             <option value="humidty">Humidity</option>
             <option value="temperature">Temperature</option>
@@ -73,6 +74,14 @@
         formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
         datalogger = document.getElementById("dataloggerSelector").value
         window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")*/
+        datalogger = document.getElementById("dataloggerSelector").value;
+        category = document.getElementById("categorySelector").value;
+        startDate = document.getElementById("startDateSelector").value
+        endDate = document.getElementById("endDateSelector").value
+
+        startDateFormatted = startDate.split("-")[2] + "/" + startDate.split("-")[1] + "/" + startDate.split("-")[0]
+        endDateFormatted = endDate.split("-")[2] + "/" + endDate.split("-")[1] + "/" + endDate.split("-")[0]
+        window.open("/advanced-settings?datalogger=" + datalogger + "&category=" + category + "&start=" + startDateFormatted + "&end=" + endDateFormatted, "_self")
     }
     
     // Set up the page
@@ -109,7 +118,7 @@
     }
 
     // Set up a chart
-    /*function drawChart(elementToDrawOn, labels, data, name, color1, color2) {
+    function drawChart(elementToDrawOn, labels, data, color1, color2) {
         // Set up the light level chart
         const ctx = elementToDrawOn;
         
@@ -123,7 +132,7 @@
         data: {
         labels: labels,
         datasets: [{
-            label: name,
+            label: "Graph",
             data: data,
             fill: false,
             borderColor: gradient,
@@ -131,21 +140,18 @@
         }]
         }
         });
-    }*/
+    }
 
-    /*data = "{{ data }}";
+    data = "{{ data }}";
     if (data != "") {
-        dataArr = data.split("*");
+        dataArr = data.split(",");
 
-        // Turn data into seperate arrays of humidity, light levels, etc
-        var lightLevels = dataArr[1].split(",");
-        var humidity = dataArr[3].split(",");
-        var temperature = dataArr[5].split(",");
-        var phLevel = dataArr[7].split(",");
-        var soilMoisture = dataArr[9].split(",");
+        drawChart(document.getElementById("graph"), generatePlaceholderLabels(dataArr.length), dataArr, "#96F3CC", "#BEBBF7");
+    }
+    
 
 
-        drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
+        /*drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
         drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
         drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
         drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
