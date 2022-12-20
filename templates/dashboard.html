@@ -70,8 +70,6 @@
             }
         }    
     }
-
-    data = "{{ data }}"
     
     // Set up the page
     isAdmin = "{{ isAdmin }}";
@@ -119,9 +117,20 @@
         });
     }
 
-    drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Light Levels", "#96F3CC", "#BEBBF7")
-    drawChart(document.getElementById("humidity"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Humidity", "#BEBBF7", "#4EA699")
-    drawChart(document.getElementById("temperature"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Temperature", "#7772B1", "#A6CEE3")
-    drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(100), generatePlaceholderData(100), "PH Level", "#BEBBF7", "#A6CEE3")
-    drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(100), generatePlaceholderData(100), "Soil Moisture", "#7772B1", "#A6CEE3")
+    data = "{{ data }}";
+    dataArr = data.split("*");
+
+    // Turn data into seperate arrays of humidity, light levels, etc
+    var lightLevels = dataArr[1].split(",");
+    var humidity = dataArr[3].split(",");
+    var temperature = dataArr[5].split(",");
+    var phLevel = dataArr[7].split(",");
+    var soilMoisture = dataArr[9].split(",");
+
+
+    drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
+    drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
+    drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
+    drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
+    drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
 </script>
