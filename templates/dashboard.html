@@ -51,6 +51,9 @@
             </div>
         </div>
 
+        <input type="date" id="dateSelector" value="2022-12-20" min="2022-12-17" style="display: inline-block;">
+        <button id="button" onclick="changeDaySelected()" style="display: inline-block;">Change day Selected</button>
+
     
 <div id="mainContentWrapper">  
 
@@ -69,6 +72,12 @@
                 return singleCookie[i].split("=")[1];
             }
         }    
+    }
+
+    function changeDaySelected() {
+        day = document.getElementById("dateSelector").value
+        formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
+        window.open("/getDay?day=" + formattedDay, "_self")
     }
     
     // Set up the page
@@ -118,19 +127,21 @@
     }
 
     data = "{{ data }}";
-    dataArr = data.split("*");
+    if (data != "") {
+        dataArr = data.split("*");
 
-    // Turn data into seperate arrays of humidity, light levels, etc
-    var lightLevels = dataArr[1].split(",");
-    var humidity = dataArr[3].split(",");
-    var temperature = dataArr[5].split(",");
-    var phLevel = dataArr[7].split(",");
-    var soilMoisture = dataArr[9].split(",");
+        // Turn data into seperate arrays of humidity, light levels, etc
+        var lightLevels = dataArr[1].split(",");
+        var humidity = dataArr[3].split(",");
+        var temperature = dataArr[5].split(",");
+        var phLevel = dataArr[7].split(",");
+        var soilMoisture = dataArr[9].split(",");
 
 
-    drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
-    drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
-    drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
-    drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
-    drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
+        drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
+        drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
+        drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
+        drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
+        drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
+    }
 </script>

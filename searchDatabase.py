@@ -75,3 +75,11 @@ def loadDataForCurrentDay(farmID) :
         dataStr = turnDataIntoStringFormat(data)
     
     return dataStr
+
+# Get the data for a specifc day, format it, and return it
+def loadAndFormatDataForSpecificDay (day, dataloggerID):
+    dataStr = ""
+    data = loadDataForSpecificDay(day, dataloggerID)
+    if data != [] :
+        dataStr = turnDataIntoStringFormat(data)
+    return dataStr

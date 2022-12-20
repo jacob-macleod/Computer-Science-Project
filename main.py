@@ -44,6 +44,24 @@ def dashboard():
         # If user is not logged in then load sign in page
         return render_template("signIn.html", passwordFeedbackText=passwordFeedbackText)
 
+@app.route("/getDay")
+def getDay () :
+    # if the user has logged in before
+    if (request.cookies.get("username") != "") :
+        # Load the dashboard page
+        isAdmin = False
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+
+        # Find the data for the day selected
+        day = request.args.get("day")
+        # TODO: Make it so "1" is replaced with the correct dataloggerID
+        data = loadAndFormatDataForSpecificDay(day, "1")
+
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data)
+    else :
+        # If the user is not logged in load the sign in page
+        return render_template("signIn.html")
 
 # When the sign Up page is loaded
 @app.route("/signUp", methods=["GET", "POST"])
