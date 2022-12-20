@@ -1,6 +1,7 @@
 # Handles functions related to login
 import random
 from encryption import *
+from generatePlaceholderData import savePlaceholderData
 
 # Generate the ID, which is one bigger than the previous ID
 def generateID(fileToRead) :
@@ -53,6 +54,8 @@ def createAccount(firstName, lastName, username, password, farmName) :
     # Generate farmID
     farmID = generateID("database/owners.csv")
     
+    savePlaceholderData (153, str(farmID), "Main Datalogger", str(generateID("database/dataloggerTable.csv")))
+
     # Save the required details to the owners.csv file
     with open("database/owners.csv", "a") as file:
         file.write(encrypt(str(userID)) + "," + encrypt(str(farmID)) + "," + encrypt(firstName) + "," + encrypt(lastName) + "," + encrypt(username) + "," + encrypt(password) + "\n")

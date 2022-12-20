@@ -1,6 +1,7 @@
 import random
 import math
 from datetime import datetime, timedelta
+from encryption import *
 
 # Generates placeholder data
 def generatePlaceholderData(numberOfValues) :
@@ -10,7 +11,7 @@ def generatePlaceholderData(numberOfValues) :
     # f(x)=RandomBetween(1,5) sin(RandomBetween(1,3) x)+((RandomBetween(-5,5))/(10)) x
     for i in range(0, numberOfValues):
         x = i/10
-        itemToAppend= (random.randint(1,5) * (random.randint(1,5)*x)) + (x*((random.randint(-5,5))/10))
+        itemToAppend= str(int(random.randint(1,5) * (random.randint(1,5)*x)) + (x*((random.randint(-5,5))/10)))
         dataItems.append(itemToAppend)
     
 
@@ -68,17 +69,26 @@ def generatePlaceholderLabels(numberOfValues) :
     return labels
 
 
-print (generatePlaceholderLabels(44))
-
 
 # Save placeholder data to the relevant files
-def savePlaceholderData (numberOfItems) :
+# This will generate data for a single datalogger, and multiple dataloggers can be added
+# This will need to be done everytime a user signs up
+def savePlaceholderData (numberOfItems, farmID, dataloggerName, id) :
     lightLevels = generatePlaceholderData(numberOfItems)
     humidity = generatePlaceholderData(numberOfItems)
     phLevel = generatePlaceholderData(numberOfItems)
     soilMoisture = generatePlaceholderData(numberOfItems)
     temperature = generatePlaceholderData(numberOfItems)
 
-# TODO: Write functions to put the text in the following files:
-# Dataloggertable - stores dataloggerID, farmID, dataloggerName
-# Data table - stores dataloggerID, date, time, lightlevels, humidity, ph level, soil moisture, temperature
+    # All data will have the same labels
+    labels = generatePlaceholderLabels(numberOfItems)
+
+    # Save data to data table
+    with open("database/dataTable.csv", 'a') as file:
+        for i in range(0, numberOfItems):
+            lineToAppend = encrypt(id) + "," + encrypt(labels[i].split("*")[0]) + "," + encrypt(labels[i].split("*")[1]) + "," + encrypt(lightLevels[i]) + "," + encrypt(humidity[i]) + "," + encrypt(phLevel[i]) + "," + encrypt(soilMoisture[i]) + "," + encrypt(temperature[i]) + "\n"
+            file.write(lineToAppend)
+
+    # Save data to datalogger table
+    with open("database/dataloggerTable.csv", 'a') as file:
+        file.write(encrypt(id) + "," + encrypt(farmID) + "," + encrypt(dataloggerName) + "\n")
