@@ -54,12 +54,7 @@
         <input type="date" id="dateSelector" value="2022-12-20" min="2022-12-17" style="display: inline-block;">
         <button id="button" onclick="changeDaySelected()" style="display: inline-block;">Change day Selected</button>
         <br>
-            <select id="datalogger">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="opel">Opel</option>
-              <option value="audi">Audi</option>
-            </select>
+            <select id="dataloggerSelector"></select>
     <button id="button" onclick="changeDaySelected()" style="display:inline-block;">Change Datalogger</button>
     
 <div id="mainContentWrapper">  
@@ -95,6 +90,18 @@
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
         document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
+    }
+
+    // Fill the datalogger select element with values
+    dataloggers = "{{ dataloggers }}";
+    dataloggersArr = dataloggers.split(",");
+    for (i=0;i<dataloggersArr.length;i++) {
+            if (dataloggersArr[i] != "") {
+            option = document.createElement("option");
+            option.value = dataloggersArr[i];
+            option.innerHTML = dataloggersArr[i];
+            document.getElementById("dataloggerSelector").appendChild(option);
+        }
     }
     
 

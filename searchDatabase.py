@@ -86,13 +86,12 @@ def loadAndFormatDataForSpecificDay (day, dataloggerID):
 
 # Finds all the dataloggers owned by the farm ID
 def findDataloggersOwnedByFarmID(farmID) :
-    dataloggers = []
+    dataloggers = ""
     with open("database/dataloggerTable.csv", 'r') as file:
         # For each line in the file, if the farmID of the datalogger == farmID, then save the datalogger name to the array
         for line in file:
             if decrypt(line.split(",")[1]) == farmID:
-                dataloggers.append(decrypt(line.split(",")[2]))
+                dataloggers = dataloggers + (decrypt(line.split(",")[2])) + ","
     
     return dataloggers
 
-print (findDataloggersOwnedByFarmID("1"))
