@@ -65,3 +65,6 @@ def createAccount(firstName, lastName, username, password, farmName) :
 
 def getFarmName(username) :
     return findValue(findValue(username, "database/owners.csv", 4, 1), "database/farmTable.csv", 0, 1)
+
+def getFarmID(username) :
+    return findValue(findValue(username, "database/owners.csv", 4, 1), "database/farmTable.csv", 0, 0)

@@ -72,8 +72,6 @@ def loadDataForCurrentDay(farmID) :
             i = 101
         
     if data != [] :
-        print (turnDataIntoStringFormat(data))
         dataStr = turnDataIntoStringFormat(data)
     
-
-loadDataForCurrentDay("1")
+    return dataStr
