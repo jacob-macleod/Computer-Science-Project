@@ -68,3 +68,6 @@ def getFarmName(username) :
 
 def getFarmID(username) :
     return findValue(findValue(username, "database/owners.csv", 4, 1), "database/farmTable.csv", 0, 0)
+
+def getDataloggerID(dataloggerName) :
+    return findValue(dataloggerName, "database/dataloggerTable.csv", 2, 0)

@@ -55,8 +55,9 @@ def getDay () :
 
         # Find the data for the day selected
         day = request.args.get("day")
-        # TODO: Make it so "1" is replaced with the correct dataloggerID
-        data = loadAndFormatDataForSpecificDay(day, "1")
+        dataloggerName = request.args.get("datalogger")
+        dataloggerID = getDataloggerID(dataloggerName)
+        data = loadAndFormatDataForSpecificDay(day, dataloggerID)
 
         return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
     else :

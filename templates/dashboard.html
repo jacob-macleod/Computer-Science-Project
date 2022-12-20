@@ -79,7 +79,8 @@
     function changeDaySelected() {
         day = document.getElementById("dateSelector").value
         formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
-        window.open("/getDay?day=" + formattedDay, "_self")
+        datalogger = document.getElementById("dataloggerSelector").value
+        window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")
     }
     
     // Set up the page
