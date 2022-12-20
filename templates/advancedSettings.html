@@ -13,10 +13,10 @@
 <body>
     
         <div id="banner">
+                <p id="unselectedMenuItem" onclick="window.open('/', '_self')" style="display: inline-block;">Dashboard</p>
                 <div id="selectedMenuItem" style="display: inline-block;">
-                    Dashboard
+                    Advanced Graph Settings
                 </div>   
-                <p id="unselectedMenuItem" onclick="window.open('/advanced-settings', '_self')" style="display: inline-block;">Advanced Graph Settings</p>
                 <p id="unselectedMenuItem" onclick="window.open('/configure-devices', '_self')" name="restrictedItem" style="display: inline-block; visibility:hidden;">Configure Devices</p>
                 <p id="unselectedMenuItem" onclick="window.open('/manage-users', '_self')" name="restrictedItem" style="display: inline-block; visibility:hidden;">Manage Users</p>
                 <p id="unselectedMenuItem" style="display: inline-block;">✦</p>
@@ -25,37 +25,29 @@
                 <p id="informationMenuItem" style="display: inline-block;" name="adminIndicator">Worker</p>
         </div>
 
-        <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
-
-        <div id="graphsRow1">
-            <div style="position: relative; width:70vh; height:40vh;">
-                <canvas  id="lightLevels"></canvas>
-            </div>
-
-            <div style="position: relative; width:70vh; height:40vh;">
-                <canvas id="humidity"></canvas>
-            </div>
-        </div>
-
-        <div id="graphsRow2">
-            <div style="position: relative; width:47vh; height:40vh;">
-                <canvas  id="temperature"></canvas>
-            </div>
-
-            <div style="position: relative; width:47vh; height:40vh;">
-                <canvas id="phLevel"></canvas>
-            </div>
-
-            <div style="position: relative; width:47vh; height:40vh;">
-                <canvas id="soilMoisture"></canvas>
-            </div>
-        </div>
-
-        <input type="date" id="dateSelector" value="2022-12-20" min="2022-12-17" style="display: inline-block;">
-        <button id="button" onclick="changeDaySelected()" style="display: inline-block;">Change day Selected</button>
+        <canvas  id="graph"></canvas>
+        <p id="header">Select Your Data</p>
+        <p id="normalText">View more specific graphs based on a single data category</p>
         <br>
-            <select id="dataloggerSelector"></select>
-    <button id="button" onclick="changeDaySelected()" style="display:inline-block;">Change Datalogger</button>
+        <label id="normalText" syle="display:inline-block;">Datalogger: </label >
+        <select syle="display:inline-block;" id="dataloggerSelector"></select>
+        <br>
+        <label id="normalText" syle="display:inline-block;">Data Category: </label>
+        <select syle="display:inline-block; id="categorySelector">
+            <option value="lightLevels">Light Levels</option>
+            <option value="humidty">Humidity</option>
+            <option value="temperature">Temperature</option>
+            <option value="phLevel">PH Level</option>
+            <option value="soilMoisture">Soil Moisture</option>
+        </select>
+        <br>
+        <label id="normalText" syle="display:inline-block;">Start Date: </label>
+        <input syle="display:inline-block;" type="date" id="startDateSelector" value="2022-12-20" min="2022-12-17" style="display: inline-block;">
+        <br>
+        <label id="normalText" syle="display:inline-block;">End Date: </label>
+        <input syle="display:inline-block;" type="date" id="endDateSelector" value="2022-12-20" min="2022-12-17" style="display: inline-block;">
+        <br>
+        <button id="button" onclick="loadGraph()" style="display: inline-block;">Load Graph</button>
     
 <div id="mainContentWrapper">  
 
@@ -76,17 +68,17 @@
         }    
     }
 
-    function changeDaySelected() {
-        day = document.getElementById("dateSelector").value
+    function loadGraph() {
+        /*day = document.getElementById("dateSelector").value
         formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
         datalogger = document.getElementById("dataloggerSelector").value
-        window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")
+        window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")*/
     }
     
     // Set up the page
     isAdmin = "{{ isAdmin }}";
     document.cookie = "isAdmin={{ isAdmin }}";
-    document.getElementById("firstName").innerHTML = "{{ firstName }}"
+    //document.getElementById("firstName").innerHTML = "{{ firstName }}"
     document.getElementsByName("username")[0].innerHTML = getCookie("username");
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
@@ -117,7 +109,7 @@
     }
 
     // Set up a chart
-    function drawChart(elementToDrawOn, labels, data, name, color1, color2) {
+    /*function drawChart(elementToDrawOn, labels, data, name, color1, color2) {
         // Set up the light level chart
         const ctx = elementToDrawOn;
         
@@ -139,9 +131,9 @@
         }]
         }
         });
-    }
+    }*/
 
-    data = "{{ data }}";
+    /*data = "{{ data }}";
     if (data != "") {
         dataArr = data.split("*");
 
@@ -158,5 +150,5 @@
         drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
         drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
         drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
-    }
+    }*/
 </script>

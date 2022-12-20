@@ -44,6 +44,27 @@ def dashboard():
         # If user is not logged in then load sign in page
         return render_template("signIn.html", passwordFeedbackText=passwordFeedbackText)
 
+@app.route("/advanced-settings")
+def advancedSettings () :
+    # if the user has logged in before
+    if (request.cookies.get("username") != "") :
+        # Load the dashboard page
+        isAdmin = False
+        # See if the user is admin
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+
+        # TODO: Find the data for the day selected
+        '''day = request.args.get("day")
+        dataloggerName = request.args.get("datalogger")
+        dataloggerID = getDataloggerID(dataloggerName)
+        data = loadAndFormatDataForSpecificDay(day, dataloggerID)'''
+
+        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
+    else :
+        # If the user is not logged in load the sign in page
+        return render_template("signIn.html")
+
 @app.route("/getDay")
 def getDay () :
     # if the user has logged in before
