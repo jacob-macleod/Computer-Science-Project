@@ -57,7 +57,8 @@ def advancedSettings () :
 
 
         data = ""
-        
+        labels = ""
+
         # If arguments have been supplied
         if request.args.get("datalogger") != None:
             # Save the results of the arguments
@@ -67,9 +68,11 @@ def advancedSettings () :
             endDate = request.args.get("end")
             dataloggerID = getDataloggerID(dataloggerName)
 
+            labels = generateLabels(startDate, endDate)
+
             data = getDataForTimePeriod (dataloggerID, category, startDate, endDate)
             
-        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), data=data)
+        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), data=data, labels=labels)
     else :
         # If the user is not logged in load the sign in page
         return render_template("signIn.html")

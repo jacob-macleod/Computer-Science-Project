@@ -132,3 +132,24 @@ def getDataForTimePeriod (dataloggerID, category, startDate, endDate) :
 
     return individualdataPoints
 
+def generateLabels(startDate, endDate) :
+    # Convert the start and end dates to date time format
+    startDate = datetime.strptime(startDate, "%d/%m/%Y")
+    endDate = datetime.strptime(endDate, "%d/%m/%Y")
+
+    labels = []
+    listOfDays = ""
+
+    # Turn the start and end dates into a list of dates in between, inclusive
+    dates = [startDate + timedelta(days=x) for x in range(0, ((endDate + timedelta(1))-startDate).days)]
+
+    # For each date found
+    with open("database/dataTable.csv", 'r') as file:
+        for line in file:
+            for day in dates:
+                if decrypt(line.split(",")[1]) == day.strftime("%d/%m/%Y"):
+                    day = decrypt(line.split(",")[1])
+                    day = day.split("/")[0] + "/" + day.split("/")[1]
+                    listOfDays = listOfDays + day + " " + decrypt(line.split(",")[2]) + ","
+
+    return listOfDays
