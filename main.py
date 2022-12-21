@@ -92,7 +92,9 @@ def getDay () :
         dataloggerID = getDataloggerID(dataloggerName)
         data = loadAndFormatDataForSpecificDay(day, dataloggerID)
 
-        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
+        labels = generateLabels(day, day)
+
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), labels=labels)
     else :
         # If the user is not logged in load the sign in page
         return render_template("signIn.html")
