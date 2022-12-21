@@ -26,6 +26,7 @@
         </div>
 
         <p id = "header">Welcome back,  <span id="firstName" style="color: #A6CEE3"></span></p>
+        <p id="feedbackText"></p>
 
         <div id="graphsRow1">
             <div style="position: relative; width:70vh; height:40vh;">
@@ -158,5 +159,10 @@
         drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
         drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
         drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
+    } else {
+        // Hide the graph
+        document.getElementById("graphsRow1").style.display = "none";
+        document.getElementById("graphsRow2").style.display = "none";   
+        document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
     }
 </script>

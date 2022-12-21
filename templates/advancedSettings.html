@@ -24,12 +24,13 @@
                 <p id="informationMenuItem" style="display: inline-block;" name="username"></p>
                 <p id="informationMenuItem" style="display: inline-block;" name="adminIndicator">Worker</p>
         </div>
-        <div style="height: 70vh;">
+        <div id="graphContainer" style="height: 70vh;">
             <canvas  id="graph"></canvas>
         </div>
         <p id="header">Select Your Data</p>
         <p id="normalText">View more specific graphs based on a single data category</p>
         <br>
+        <p id="feedbackText"></p>
         <label id="normalText" syle="display:inline-block;">Datalogger: </label >
         <select syle="display:inline-block;" id="dataloggerSelector"></select>
         <br>
@@ -147,14 +148,9 @@
         dataArr = data.split(",");
 
         drawChart(document.getElementById("graph"), generatePlaceholderLabels(dataArr.length), dataArr, "#96F3CC", "#BEBBF7");
+    }  else {
+        // Hide the graph
+        document.getElementById("graphContainer").style.display = "none";   
+        document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
     }
-    
-
-
-        /*drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
-        drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
-        drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
-        drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
-        drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
-    }*/
 </script>

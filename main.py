@@ -27,7 +27,7 @@ def dashboard():
             # Log the user in
             # Store username as a cookie and load the dashboard page
             isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)))
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data="loadDataForCurrentDay(getFarmID(username))", dataloggers = findDataloggersOwnedByFarmID(getFarmID(username))))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
@@ -55,14 +55,11 @@ def advancedSettings () :
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
 
-        # TODO: Find the data for the day selected
-        '''day = request.args.get("day")
-        dataloggerName = request.args.get("datalogger")
-        dataloggerID = getDataloggerID(dataloggerName)
-        data = loadAndFormatDataForSpecificDay(day, dataloggerID)'''
 
+        data = ""
+        
         # If arguments have been supplied
-        if request.args.get("datalogger") != "":
+        if request.args.get("datalogger") != None:
             # Save the results of the arguments
             dataloggerName = request.args.get("datalogger")
             category = request.args.get("category")
