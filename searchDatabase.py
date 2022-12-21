@@ -153,3 +153,36 @@ def generateLabels(startDate, endDate) :
                     listOfDays = listOfDays + day + " " + decrypt(line.split(",")[2]) + ","
 
     return listOfDays
+
+# generates labels for today
+# If no data stored for today, generate labels for the last avaliable day
+def generateLabelsForToday(farmID):
+    # Set initial vlaues
+    today = str(datetime.today().strftime("%d/%m/%Y"))
+    labels = []
+    dataloggerID = ""
+
+    # Find the first data monitor belonging to the farmID
+    with open("database/dataloggerTable.csv", 'r') as file:
+        for line in file:
+            if decrypt(line.split(",")[1]) == farmID:
+                if dataloggerID == "":
+                    dataloggerID = decrypt(line.split(",")[0])
+
+    # Try to load the data for the current day
+    # If data is found, generate the labels for that day
+    # If no data found, go back a day and try this again. Repeat for 100 times
+    # If no data is saved in the csv files or the dataloggerID is wrong this will go on for ever, hence why we cap it out at 100 tries
+    # If actually deployed, even 100 tries could be too much. I have chosen 100 tries because since I am not actually making the dataloggers, so placeholder data could be generated then
+    # No new generated generated for ages. But if I was making the dataloggers, new data should be generated each day so i could be reduced dramatically
+    i = 0
+    while i < 100:
+        # Get the day to look at - at first i = 0 so the day is today, then it goes back a day at a time
+        day = (datetime.today() - timedelta(i)).strftime("%d/%m/%Y")
+
+        if loadDataForSpecificDay(day, dataloggerID) == [] :
+            i = i + 1
+        else:
+            labels = generateLabels(day, day)
+            i = 101  
+    return labels

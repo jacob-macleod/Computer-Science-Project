@@ -144,7 +144,9 @@
 
     data = "{{ data }}";
     if (data != "") {
+        labels = "{{ labels }}"
         dataArr = data.split("*");
+        labelsArr = labels.split(",")
 
         // Turn data into seperate arrays of humidity, light levels, etc
         var lightLevels = dataArr[1].split(",");
@@ -154,11 +156,11 @@
         var soilMoisture = dataArr[9].split(",");
 
 
-        drawChart(document.getElementById("lightLevels"), generatePlaceholderLabels(lightLevels.length), lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
-        drawChart(document.getElementById("humidity"), generatePlaceholderLabels(lightLevels.length), humidity, "Humidity", "#BEBBF7", "#4EA699");
-        drawChart(document.getElementById("temperature"), generatePlaceholderLabels(lightLevels.length), temperature, "Temperature", "#7772B1", "#A6CEE3");
-        drawChart(document.getElementById("phLevel"), generatePlaceholderLabels(lightLevels.length), phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
-        drawChart(document.getElementById("soilMoisture"), generatePlaceholderLabels(lightLevels.length), soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
+        drawChart(document.getElementById("lightLevels"), labelsArr, lightLevels, "Light Levels", "#96F3CC", "#BEBBF7");
+        drawChart(document.getElementById("humidity"), labelsArr, humidity, "Humidity", "#BEBBF7", "#4EA699");
+        drawChart(document.getElementById("temperature"), labelsArr, temperature, "Temperature", "#7772B1", "#A6CEE3");
+        drawChart(document.getElementById("phLevel"), labelsArr, phLevel, "PH Level", "#BEBBF7", "#A6CEE3");
+        drawChart(document.getElementById("soilMoisture"), labelsArr, soilMoisture, "Soil Moisture", "#7772B1", "#A6CEE3");
     } else {
         // Hide the graph
         document.getElementById("graphsRow1").style.display = "none";

@@ -27,7 +27,7 @@ def dashboard():
             # Log the user in
             # Store username as a cookie and load the dashboard page
             isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data="loadDataForCurrentDay(getFarmID(username))", dataloggers = findDataloggersOwnedByFarmID(getFarmID(username))))
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username))), labels=generateLabelsForToday(getFarmID(username)))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
@@ -40,7 +40,7 @@ def dashboard():
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
         # Load dashboard page
-        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=loadDataForCurrentDay(getFarmID(request.cookies.get("username"))), dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=loadDataForCurrentDay(getFarmID(request.cookies.get("username"))), dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), labels=generateLabelsForToday(getFarmID(request.cookies.get("username"))))
     else:
         # If user is not logged in then load sign in page
         return render_template("signIn.html", passwordFeedbackText=passwordFeedbackText)
@@ -132,7 +132,7 @@ def signUp() :
             # Return the dashboard page
             # Store username as a cookie and load the dashboard page
             isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)))
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)), labels=generateLabelsForToday(getFarmID(username)))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
