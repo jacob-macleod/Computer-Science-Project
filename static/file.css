@@ -65,6 +65,12 @@ body {
     }
 }
 
+#menuItems {
+    display: none;
+    background: #F5F5F5;
+    border-radius: 16px;
+}
+
 
 
 #unselectedMenuItem {

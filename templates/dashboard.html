@@ -28,7 +28,14 @@
             </div>
 
             <div id="hamburgerMenu">
-                
+                <img id="hamburgerIcon" style="width: 20px; height: 20px;" src="static/Hamburger.svg"></a>
+                <div id="menuItems">
+                    <div style="display:grid; padding-left: 15px;">
+                        <p id="unselectedMenuItem" onclick="window.open('/advanced-settings', '_self')">Advanced Graph Settings</p>
+                        <p id="unselectedMenuItem" onclick="window.open('/configure-devices', '_self')" name="restrictedItem" style="display:none;">Configure Devices</p>
+                        <p id="unselectedMenuItem" onclick="window.open('/manage-users', '_self')" name="restrictedItem" style="display:none;">Manage Users</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -69,10 +76,25 @@
 
 </div>
 <script>
+    icon = document.getElementById("hamburgerIcon");
+    icon.addEventListener("click", () => {
+        if (icon.getAttribute("src") == "static/Hamburger.svg") {
+	        icon.setAttribute("src", "static/close.svg");
+            document.getElementById("menuItems").style.display = "grid";
+        } else {
+            icon.setAttribute("src", "static/Hamburger.svg")
+            document.getElementById("menuItems").setAttribute("style", "display:none;")
+        }
+    });
+    
+
+
     // Get the value of a cookie by it's name
     function getCookie(cookieName) {
-        singleCookie = decodeURIComponent(document.cookie).split(";");
-    
+        singleCookie = decodeURIComponent(document.cookie)
+        singleCookie = singleCookie.toString();
+        singleCookie = singleCookie.split(";");
+
         // Look at every cookie
         for (i=0;i<singleCookie.length;i++) {
             // If the cookie's name is right
@@ -94,7 +116,7 @@
     isAdmin = "{{ isAdmin }}";
     document.cookie = "isAdmin={{ isAdmin }}";
     document.getElementById("firstName").innerHTML = "{{ firstName }}"
-    document.getElementsByName("username")[0].innerHTML = getCookie("username");
+    document.getElementsByName("username")[0].innerHTML = getCookie(" username");
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
         document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
