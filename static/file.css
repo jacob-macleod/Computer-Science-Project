@@ -29,6 +29,14 @@ body {
     height:40vh;
 }
 
+#menu {
+    display:block;
+}
+
+#hamburgerMenu {
+    display: none;
+}
+
 @media only screen and (max-width:700px) {
     #graphsRow1{
         grid-template-columns: auto;
@@ -46,6 +54,14 @@ body {
     #smallGraph {
         width: auto;
         height: auto;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #hamburgerMenu {
+        display: block;
     }
 }
 
