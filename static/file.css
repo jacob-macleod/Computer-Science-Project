@@ -17,6 +17,38 @@ body {
     grid-template-columns: auto auto auto;
 }
 
+#bigGraph {
+    position: relative; 
+    width:70vh; 
+    height:40vh;
+}
+
+#smallGraph {
+    position: relative; 
+    width:47vh; 
+    height:40vh;
+}
+
+@media only screen and (max-width:700px) {
+    #graphsRow1{
+        grid-template-columns: auto;
+    }
+
+    #graphsRow2 {
+        grid-template-columns: auto;
+    }
+
+    #bigGraph {
+        width: auto;
+        height: auto;
+    }
+
+    #smallGraph {
+        width: auto;
+        height: auto;
+    }
+}
+
 
 
 #unselectedMenuItem {

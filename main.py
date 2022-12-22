@@ -27,7 +27,7 @@ def dashboard():
             # Log the user in
             # Store username as a cookie and load the dashboard page
             isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username))), labels=generateLabelsForToday(getFarmID(username)))
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)), labels=generateLabelsForToday(getFarmID(username))))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
@@ -48,7 +48,7 @@ def dashboard():
 @app.route("/advanced-settings")
 def advancedSettings () :
     # if the user has logged in before
-    if (request.cookies.get("username") != "") :
+    if (request.cookies.get("username") != None) :
         # Load the dashboard page
         isAdmin = False
         # See if the user is admin
@@ -80,7 +80,7 @@ def advancedSettings () :
 @app.route("/getDay")
 def getDay () :
     # if the user has logged in before
-    if (request.cookies.get("username") != "") :
+    if (request.cookies.get("username") != None) :
         # Load the dashboard page
         isAdmin = False
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
@@ -134,7 +134,7 @@ def signUp() :
             # Return the dashboard page
             # Store username as a cookie and load the dashboard page
             isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username)), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)), labels=generateLabelsForToday(getFarmID(username)))
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)), labels=generateLabelsForToday(getFarmID(username))))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard

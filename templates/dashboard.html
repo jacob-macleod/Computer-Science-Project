@@ -1,5 +1,6 @@
 <! DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/file.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,25 +30,25 @@
         <p id="feedbackText"></p>
 
         <div id="graphsRow1">
-            <div style="position: relative; width:70vh; height:40vh;">
+            <div id="bigGraph">
                 <canvas  id="lightLevels"></canvas>
             </div>
 
-            <div style="position: relative; width:70vh; height:40vh;">
+            <div id="bigGraph">
                 <canvas id="humidity"></canvas>
             </div>
         </div>
 
         <div id="graphsRow2">
-            <div style="position: relative; width:47vh; height:40vh;">
+            <div id="smallGraph">
                 <canvas  id="temperature"></canvas>
             </div>
 
-            <div style="position: relative; width:47vh; height:40vh;">
+            <div id="smallGraph">
                 <canvas id="phLevel"></canvas>
             </div>
 
-            <div style="position: relative; width:47vh; height:40vh;">
+            <div id="smallGraph">
                 <canvas id="soilMoisture"></canvas>
             </div>
         </div>
@@ -61,7 +62,6 @@
 <div id="mainContentWrapper">  
 
 </div>
-</body>
 <script>
     // Get the value of a cookie by it's name
     function getCookie(cookieName) {
@@ -168,3 +168,5 @@
         document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
     }
 </script>
+</body>
+</html>

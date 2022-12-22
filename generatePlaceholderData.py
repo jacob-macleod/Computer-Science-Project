@@ -6,12 +6,14 @@ from encryption import *
 # Generates placeholder data
 def generatePlaceholderData(numberOfValues) :
     dataItems = []
+    randomNumber2 = random.randint(1,5)
+    randomNumber3 = random.randint(-5,5)
 
     # Generate data according to the following function. Works in Geogebra. Looks a little complicated, but it generates data that trends slightly up or down over a period
     # f(x)=RandomBetween(1,5) sin(RandomBetween(1,3) x)+((RandomBetween(-5,5))/(10)) x
     for i in range(0, numberOfValues):
         x = i/10
-        itemToAppend= str(int(random.randint(1,5) * (random.randint(1,5)*x)) + (x*((random.randint(-5,5))/10)))
+        itemToAppend= str((math.sin(randomNumber2*x)) + (x*((randomNumber3)/10)))
         dataItems.append(itemToAppend)
     
 
