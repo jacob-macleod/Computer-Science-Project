@@ -76,6 +76,7 @@
 
 </div>
 <script>
+    // When the user clicks the hamburger icon, change the icon and show the hamburger menu. When the user clicks it again, do the opposite
     icon = document.getElementById("hamburgerIcon");
     icon.addEventListener("click", () => {
         if (icon.getAttribute("src") == "static/Hamburger.svg") {
@@ -166,6 +167,9 @@
             borderColor: gradient,
             tension: 0.05
         }]
+        },
+        options:  {
+            maintainAspectRatio:false
         }
         });
     }

@@ -48,12 +48,12 @@ body {
 
     #bigGraph {
         width: auto;
-        height: auto;
+        height: 40vh;
     }
 
     #smallGraph {
         width: auto;
-        height: auto;
+        height: 40vh;
     }
 
     #menu {
