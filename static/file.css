@@ -37,42 +37,6 @@ body {
     display: none;
 }
 
-@media only screen and (max-width:700px) {
-    #graphsRow1{
-        grid-template-columns: auto;
-    }
-
-    #graphsRow2 {
-        grid-template-columns: auto;
-    }
-
-    #bigGraph {
-        width: auto;
-        height: 40vh;
-    }
-
-    #smallGraph {
-        width: auto;
-        height: 40vh;
-    }
-
-    #menu {
-        display: none;
-    }
-
-    #hamburgerMenu {
-        display: block;
-    }
-}
-
-#menuItems {
-    display: none;
-    background: #F5F5F5;
-    border-radius: 16px;
-}
-
-
-
 #unselectedMenuItem {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -209,3 +173,88 @@ body {
     
     color: #FFFFFF;
 }
+
+@media only screen and (max-width:700px) {
+    #graphsRow1{
+        grid-template-columns: auto;
+    }
+
+    #graphsRow2 {
+        grid-template-columns: auto;
+    }
+
+    #bigGraph {
+        width: auto;
+        height: 40vh;
+    }
+
+    #smallGraph {
+        width: auto;
+        height: 40vh;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #hamburgerMenu {
+        display: block;
+    }
+
+    #mainContentWrapper {
+        grid-template-columns: auto;
+    }
+
+    #image{
+        width: 40vh;
+        height: min-content;
+    }
+
+    #header {
+        font-size: 40px;
+    }
+
+    #normalText {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    #feedbackText {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    #subheader {
+        font-size: 24px;
+    }
+
+    #inputBoxText {
+        font-size: 20px;
+    }
+
+    #passwordInputBox {
+        font-size: 20px;
+    }
+
+    #passwordConfirmationInputBox {
+        font-size: 20px;
+    }
+
+    ::placeholder {
+        font-size: 18px;
+    }
+
+    #button {
+        font-size: 18px;
+        line-height: 21px;
+    }
+}
+
+#menuItems {
+    display: none;
+    background: #F5F5F5;
+    border-radius: 16px;
+}
+
+
+

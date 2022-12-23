@@ -1,5 +1,6 @@
 <! DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/file.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,13 +17,13 @@
     
 <div id="mainContentWrapper">
     <div>
-        <img src="static/signUpImage.png">
+        <img id="image" src="static/signUpImage.png">
     </div>
     
     <div>
         <div>
             <p id = "header">Sign Up to Create an Account</p>
-            <p id = "normalText">This page lets you sign up to the website. Want to <a id="normalText" href="/">sign in</a> instead?</p>
+            <p style="white-space: pre;" id = "normalText">This page lets you sign up to the website. Want to <a id="normalText" href="/">sign in</a> instead?</p>
             <p id = "subheader"> Your Details </p>
 
             <form action="{{ url_for("signUp")}}" method="post"> 

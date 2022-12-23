@@ -115,7 +115,7 @@
     // Set up the page
     isAdmin = "{{ isAdmin }}";
     document.cookie = "isAdmin={{ isAdmin }}";
-    document.getElementsByName("username")[0].innerHTML = getCookie(" username");
+    document.getElementsByName("username")[0].innerHTML = getCookie("username");
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
         document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
