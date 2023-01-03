@@ -24,52 +24,94 @@
     
     <div>
         <div>
-            <p class = "header">Sign Up to Create an Account</p>
-            <p style="white-space: pre;" class = "normalText">This page lets you sign up to the website. Want to <a class="normalText" href="/">sign in</a> instead?</p>
-            <p class = "subheader"> Your Details </p>
+            <p id = "header">Sign Up to Create an Account</p>
+            <p style="white-space: pre;" id = "normalText">This page lets you sign up to the website. Want to <a id="normalText" href="/">sign in</a> instead?</p>
+            <p id = "subheader"> Your Details </p>
 
             <form action="{{ url_for("signUp")}}" method="post"> 
-                <p style="display: inline-block;" class = "normalText">First Name</p>
-                <input style="display: inline-block;" placeholder="Write here" name="firstName" class = "inputBoxText"></input>
-                <p name="feedbackText" style="display: inline-block;" class="feedbackText">{{ firstNameFeedbackText }}</p>
+                <p style="display: inline-block;" id = "normalText">First Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="firstName" id = "inputBoxText"></input>
+                <p name="feedbackText" style="display: inline-block;" id="feedbackText">{{ firstNameFeedbackText }}</p>
                 <br>
                 
-                <p style="display: inline-block;" class = "normalText">Last Name</p>
-                <input style="display: inline-block;" placeholder="Write here" name="lastName" class = "inputBoxText"></input>
-                <p style="display: inline-block;" name="feedbackText" class="feedbackText">{{ lastNameFeedbackText }}</p>
+                <p style="display: inline-block;" id = "normalText">Last Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="lastName" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ lastNameFeedbackText }}</p>
                 <br>
                 
-                <p style="display: inline-block;" class = "normalText">Username</p>
-                <input style="display: inline-block;" placeholder="Write here" name="username" class = "inputBoxText"></input>
-                <p style="display: inline-block;" name="feedbackText" class="feedbackText">{{ usernameFeedbackText }}</p>
+                <p style="display: inline-block;" id = "normalText">Username</p>
+                <input style="display: inline-block;" placeholder="Write here" name="username" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ usernameFeedbackText }}</p>
                 <br>
                 
-                <p style="display: inline-block;"  class = "normalText">Password</p>
-                <input style="display: inline-block;" placeholder="********" class="password" name="password" class = "passwordInputBox"></input>
-                <p style="display: inline-block;" name="feedbackText" class="feedbackText">{{ passwordFeedbackText }}</p>
+                <p style="display: inline-block;"  id = "normalText">Password</p>
+                <input style="display: inline-block;" placeholder="********" class="password" name="password" id = "passwordInputBox"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
                 <br>
 
-                <p style="display: inline-block;"  class = "normalText">Password Confirmation</p>
-                <input style="display: inline-block;" placeholder="********" name="passwordConfirmation" class = "passwordConfirmationInputBox"></input>
-                <button type="button" onclick="var password = generatePassword(); document.getElementsByClassName('passwordInputBox')[0].value = password; document.getElementsByClassName('passwordConfirmationInputBox')[0].value = password;" class="button">Generate a Password</button>
+                <p style="display: inline-block;"  id = "normalText">Password Confirmation</p>
+                <input style="display: inline-block;" placeholder="********" name="passwordConfirmation" id = "passwordConfirmationInputBox"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
+                <button type="button" onclick="var password = generatePassword(); document.getElementById('passwordInputBox').value = password; document.getElementById('passwordConfirmationInputBox').value = password;" id="button">Generate a Password</button>
                 <br>
 
-                <p class = "subheader"> Your Farm Details </p>
-                <p style="display: inline-block;" class = "normalText">Farm Name</p>
-                <input style="display: inline-block;" placeholder="Write here" name="farmName" class = "inputBoxText"></input>
-                <p style="display: inline-block;" name="feedbackText" class="feedbackText">{{ farmNameFeedbackText }}</p>                
+                <p id = "subheader"> Your Farm Details </p>
+                <p style="display: inline-block;" id = "normalText">Farm Name</p>
+                <input style="display: inline-block;" placeholder="Write here" name="farmName" id = "inputBoxText"></input>
+                <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ farmNameFeedbackText }}</p>                
 
                 <br>
-                <button type="submit" class="button">Sign Up</button>
+                <button type="submit" id="button">Sign Up</button>
             </form>
         </div>
     </div>
 </div>
 </body>
 <script>
-    
-    document.getElementsByClassName("inputBoxText")[0].addEventListener("click", () => {
-        elements = document.getElementsByClassName('passwordInputBox')
-        alert(elements[0])
-    });
+    // Get the value of a cookie by it's name
+    function getCookie(cookieName) {
+        singleCookie = decodeURIComponent(document.cookie)
+        singleCookie = singleCookie.toString();
+        singleCookie = singleCookie.split(";");
+
+        // Look at every cookie
+        for (i=0;i<singleCookie.length;i++) {
+            // If the cookie's name is right
+            if (singleCookie[i].split("=")[0] == cookieName) {
+                // Return the cookie's value
+                return singleCookie[i].split("=")[1];
+            }
+        }    
+    }
+
+    // Apply an event listener to all the input boxes
+    inputBoxes = document.querySelectorAll('input');
+
+    // Set the value of the input boxes to equal the equivalent text in the cookie, if the associated feedback text is invisible
+    inputBoxText = getCookie("inputBoxText").split(",");
+    feedbackTexts = document.getElementsByName("feedbackText");
+
+    for (i=0;i<inputBoxText.length-1;i++) {
+        if (feedbackTexts[i].innerHTML == "") {
+            inputBoxes[i].value = inputBoxText[i];
+        }
+    }
+
+    // When an input box is clicked
+    function onInputBoxClick () {
+        inputBoxText = "";
+
+        // Append the text in all the input boxes to a string
+        for (i=0;i<inputBoxes.length;i++) {
+            inputBoxText = inputBoxText + inputBoxes[i].value + ","
+        }
+
+        // And save that string as the cookie
+        document.cookie = "inputBoxText=" + inputBoxText;
+    }
+    // For every input box add an event listener
+    for (i=0;i<inputBoxes.length;i++) {
+        inputBoxes[i].addEventListener("keyup", () => {onInputBoxClick()});
+    }
+
 </script>
