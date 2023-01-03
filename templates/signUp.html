@@ -87,13 +87,17 @@
     // Apply an event listener to all the input boxes
     inputBoxes = document.querySelectorAll('input');
 
-    // Set the value of the input boxes to equal the equivalent text in the cookie, if the associated feedback text is invisible
-    inputBoxText = getCookie("inputBoxText").split(",");
-    feedbackTexts = document.getElementsByName("feedbackText");
+    // Set the value of the input boxes to equal the equivalent text in the cookie, if the associated feedback text is invisible 
+    if (getCookie("inputBoxText") == undefined) {
+        document.cookie = "inputBoxText=,,,,,,";
+    } else {
+        inputBoxText = getCookie("inputBoxText").split(",");
+        feedbackTexts = document.getElementsByName("feedbackText");
 
-    for (i=0;i<inputBoxText.length-1;i++) {
-        if (feedbackTexts[i].innerHTML == "") {
-            inputBoxes[i].value = inputBoxText[i];
+        for (i=0;i<inputBoxText.length-1;i++) {
+            if (feedbackTexts[i].innerHTML == "") {
+                inputBoxes[i].value = inputBoxText[i];
+            }
         }
     }
 
