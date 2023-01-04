@@ -164,6 +164,7 @@ body {
     background: #000000;
     border-radius: 4px;
     cursor: pointer;
+    border: none;
 
     font-family: 'Source Sans Pro';
     font-style: normal;
