@@ -100,6 +100,32 @@
         }
     }
 
+    // Find current day
+    today = new Date();
+    // Find current year
+    year = today.getFullYear();
+    // Find the current month, then add a 0 at the start if teh date is less than 10. So 7 turns to 07
+    month = parseInt(today.getMonth()) + 1;
+    if (month < 10) {
+        month = "0" + month.toString();
+    } else {
+        month = month.toString();
+    }
+
+    // Do the same as we did for the month for the day
+    day = parseInt(today.getDate());
+    if (day < 10) {
+        day = "0" + day.toString();
+    } else {
+        day = day + day.toString();
+    }
+
+    date = year + "-" + month + "-" + day
+    
+    // Make the start date and end date selector show the date for today
+    document.getElementById("startDateSelector").setAttribute("value", date);
+    document.getElementById("endDateSelector").setAttribute("value", date);
+
     function logout() {
         // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
         deleteCookies();
