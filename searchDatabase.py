@@ -73,6 +73,7 @@ def loadDataForCurrentDay(farmID) :
         
     if data != [] :
         dataStr = turnDataIntoStringFormat(data)
+        dataStr = dataStr + "*" + day
     
     return dataStr
 

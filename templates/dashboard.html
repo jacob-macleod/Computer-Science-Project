@@ -113,7 +113,7 @@
     }
 
     date = year + "-" + month + "-" + day
-    
+
     // Make the date selector show the date for today
     document.getElementById("dateSelector").setAttribute("value", date);
 
@@ -222,9 +222,18 @@
 
     data = "{{ data }}";
     if (data != "") {
-        labels = "{{ labels }}"
+        labels = "{{ labels }}";
         dataArr = data.split("*");
-        labelsArr = labels.split(",")
+        date = dataArr.pop();
+        labelsArr = labels.split(",");
+
+        // Date is in dd/mm/yyy format. Change it to yyy-mm-dd
+        year = date.split("/")[2];
+        month = date.split("/")[1];
+        day = date.split("/")[0];
+        normalisedDate = year + "-" + month + "-" + day;
+
+        document.getElementById("dateSelector").value = normalisedDate;
 
         // Turn data into seperate arrays of humidity, light levels, etc
         var lightLevels = dataArr[1].split(",");
