@@ -108,6 +108,24 @@ body {
     color: #000000;
 }
 
+select {
+    color: #827F7F;
+    padding: 3px;
+
+    background: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+}
+
+input[type="date"] {
+    color: #827F7F;
+    padding: 3px;
+
+    background: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+}
+
 #inputBoxText {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
@@ -165,6 +183,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     border: none;
+    padding: 5px;
 
     font-family: 'Source Sans Pro';
     font-style: normal;
