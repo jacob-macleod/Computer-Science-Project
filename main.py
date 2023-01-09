@@ -143,6 +143,25 @@ def signUp() :
     # Return the sign up page
     return render_template("signUp.html", firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, passwordFeedbackText=passwordFeedbackText, usernameFeedbackText=usernameFeedbackText, farmNameFeedbackText=farmNameFeedbackText)
 
+
+# When the configure devices page is loaded
+@app.route("/configure-devices")
+def configureDevices() :
+     # If the user has logged in before
+    if (request.cookies.get("username") != None) :
+        isAdmin = False
+
+        # If the user is an admin
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+            return render_template("configureDevices.html")
+        else :
+            return render_template("permissionError.html")
+    else :
+        return render_template("signIn.html")
+
+
+
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():
