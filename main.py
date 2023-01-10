@@ -160,10 +160,6 @@ def configureDevices() :
     else :
         return render_template("signIn.html")
 
-@app.route("/error")
-def error() :
-    return render_template("permissionError.html")
-
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():

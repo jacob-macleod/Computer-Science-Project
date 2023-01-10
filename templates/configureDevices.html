@@ -51,6 +51,7 @@
 
     <div>
         <p id="header">Configure Your Devices</p>
+        <p id="normalText">View and remove your datalogging devices</p>
     </div>
 </div>
 </body>
@@ -88,6 +89,19 @@
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
         document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
+    }
+
+        // Delete all cookies
+        function deleteCookies() {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var value = cookie.indexOf("=");
+            var name = value > -1 ? cookie.substr(0, value) : cookie;
+            // To delete it, make it so it's already expired
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
     }
 
     function logout() {
