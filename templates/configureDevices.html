@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/generatePlaceholderData.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/Favicon.svg">
@@ -46,12 +47,14 @@
     
 <div id="mainContentWrapper">  
     <div>
-        <img id="image" src="static/signInImage.png">
+        <img id="image" src="static/adminWorking.png">
     </div>
 
     <div>
         <p id="header">Configure Your Devices</p>
         <p id="normalText">View and remove your datalogging devices</p>
+        <div id="table" style="border: 1px solid #827F7F; border-radius: 8px; width:fit-content;">
+        </div>
     </div>
 </div>
 </body>
@@ -102,6 +105,41 @@
             // To delete it, make it so it's already expired
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
+    }
+
+    // Find all dataloggers belonging to the user
+    //dataloggers = "{{ dataloggers }}".split(",");
+    dataloggers = ["My logger", "Datalogger 2", "Datalogger 3"];
+    // Add an element to the table for each of the dataloggers
+    for (i=0;i<dataloggers.length;i++) {
+        if (dataloggers[i] != "") {
+            // Create the container to hold the datalogger name and remove button
+            container = document.createElement("d");
+            container.id = "tableItem";
+
+            // Create the paragraph which holds the datalogger name
+            deviceName = document.createElement("p");
+            deviceName.innerHTML = dataloggers[i];
+            deviceName.id = "itemName";
+
+            // Create the button used to remove the datalogger
+            button = document.createElement("button");
+            button.innerHTML = "Remove";
+            button.setAttribute("onclick", "removeDatalogger()");
+            button.setAttribute("name", dataloggers[i]);
+            button.id = "outlinedButton";
+
+            // Append deviceName and button to the container
+            container.appendChild(deviceName);
+            container.appendChild(button);
+
+            // Append the container to the table
+            document.getElementById("table").appendChild(container);
+        }
+    }
+
+    function removeDatalogger() {
+        alert ("clicked")
     }
 
     function logout() {

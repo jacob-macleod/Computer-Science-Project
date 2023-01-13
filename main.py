@@ -154,7 +154,7 @@ def configureDevices() :
         # If the user is an admin
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
-            return render_template("configureDevices.html", isAdmin=isAdmin)
+            return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))))
         else :
             return render_template("permissionError.html")
     else :

@@ -89,6 +89,38 @@ body {
     color: #827F7F;
 }
 
+#itemName {
+    color: #000000;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+
+    padding-right: 20px;
+    display: inline-block;
+}
+
+#outlinedButton {
+    border: 1px solid #827F7F;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 3px;
+    background-color: #FFFFFF;
+    color: #827F7F;
+}
+
+#outlinedButton:hover {
+    border: 1px solid #cccbcb;
+    color: #cccbcb;
+}
+
+#tableItem{
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 #feedbackText {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
