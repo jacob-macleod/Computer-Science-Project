@@ -83,6 +83,7 @@ def loadAndFormatDataForSpecificDay (day, dataloggerID):
     data = loadDataForSpecificDay(day, dataloggerID)
     if data != [] :
         dataStr = turnDataIntoStringFormat(data)
+        dataStr = dataStr + "*" + day
     return dataStr
 
 # Finds all the dataloggers owned by the farm ID
