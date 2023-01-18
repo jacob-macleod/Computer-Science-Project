@@ -1,4 +1,3 @@
-from unicodedata import category
 from flask import Flask, request, render_template, make_response
 from loginHandler import *
 from validateTextFields import *
