@@ -1,9 +1,7 @@
-alert (document.getElementById("selectedMenuItem").innerHTML + " seperate file")
 // Set up the functionality for the hamburger menu
 hamburgerMenu();
 // Set up the menu bar of the page
-isAdmin = "{{ isAdmin }}";
-setUpMenuBar(isAdmin, "{{ firstName }}");
+setUpMenuBar(isAdmin, firstName);
 // If the user is an admin, show pages that are restricted by default
 showRestrictedPages(isAdmin);
 
@@ -41,7 +39,6 @@ function changeDaySelected() {
 
 
 // Fill the datalogger select element with values
-dataloggers = "{{ dataloggers }}";
 dataloggersArr = dataloggers.split(",");
 for (i=0;i<dataloggersArr.length;i++) {
         if (dataloggersArr[i] != "") {
@@ -52,12 +49,8 @@ for (i=0;i<dataloggersArr.length;i++) {
     }
 }
 
-data = "{{ data }}";
 if (data != "") {
-    labels = "{{ labels }}";
     dataArr = data.split("*");
-    console.log(data)
-    console.log(dataArr);
     date = dataArr.pop();
     labelsArr = labels.split(",");
 
