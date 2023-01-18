@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/generatePlaceholderData.js"></script>
+    <script src="/static/sharedFunctions.js"></script>
+    <script src="/static/dashboard.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/Favicon.svg">
     <title>Dashboard</title>
 </head>
@@ -81,17 +83,13 @@
 
 </div>
 <script>
-    // When the user clicks the hamburger icon, change the icon and show the hamburger menu. When the user clicks it again, do the opposite
-    icon = document.getElementById("hamburgerIcon");
-    icon.addEventListener("click", () => {
-        if (icon.getAttribute("src") == "static/Hamburger.svg") {
-	        icon.setAttribute("src", "static/close.svg");
-            document.getElementById("menuItems").style.display = "grid";
-        } else {
-            icon.setAttribute("src", "static/Hamburger.svg")
-            document.getElementById("menuItems").setAttribute("style", "display:none;")
-        }
-    });
+// Set up the functionality for the hamburger menu
+    hamburgerMenu();
+    // Set up the menu bar of the page
+    isAdmin = "{{ isAdmin }}";
+    setUpMenuBar(isAdmin, "{{ firstName }}");
+    // If the user is an admin, show pages that are restricted by default
+    showRestrictedPages(isAdmin);
     
     // Find current day
     today = new Date();
@@ -118,41 +116,6 @@
     // Make the date selector show the date for today
     document.getElementById("dateSelector").setAttribute("value", date);
 
-    // Delete all cookies
-    function deleteCookies() {
-        var cookies = document.cookie.split(";");
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var value = cookie.indexOf("=");
-            var name = value > -1 ? cookie.substr(0, value) : cookie;
-            // To delete it, make it so it's already expired
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    }
-
-    function logout() {
-        // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
-        deleteCookies();
-        window.open("/", "_self");
-    }
-
-    // Get the value of a cookie by it's name
-    function getCookie(cookieName) {
-        singleCookie = decodeURIComponent(document.cookie)
-        singleCookie = singleCookie.toString();
-        singleCookie = singleCookie.split(";");
-
-        // Look at every cookie
-        for (i=0;i<singleCookie.length;i++) {
-            // If the cookie's name is right
-            if (singleCookie[i].split("=")[0] == cookieName) {
-                // Return the cookie's value
-                return singleCookie[i].split("=")[1];
-            }
-        }    
-    }
-
     function changeDaySelected() {
         day = document.getElementById("dateSelector").value
         formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
@@ -160,15 +123,6 @@
         window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")
     }
     
-    // Set up the page
-    isAdmin = "{{ isAdmin }}";
-    document.cookie = "isAdmin={{ isAdmin }}";
-    document.getElementById("firstName").innerHTML = "{{ firstName }}"
-    document.getElementsByName("username")[0].innerHTML = getCookie("username");
-    if (isAdmin == "True") {
-        document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
-        document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
-    }
 
     // Fill the datalogger select element with values
     dataloggers = "{{ dataloggers }}";
@@ -180,45 +134,6 @@
             option.innerHTML = dataloggersArr[i];
             document.getElementById("dataloggerSelector").appendChild(option);
         }
-    }
-    
-
-    // Some pages are hidden by default. If the user is an admin, show them
-    if (isAdmin == "True") {
-        // Get all the items to hide
-        itemsToHide = document.getElementsByName("restrictedItem");
-        for (i=0;i<itemsToHide.length;i++) {
-            // Change their visibility to hidden
-            itemsToHide[i].style = "display: inline-block; visibility:visible;";
-        }
-    }
-
-    // Set up a chart
-    function drawChart(elementToDrawOn, labels, data, name, color1, color2) {
-        // Set up the light level chart
-        const ctx = elementToDrawOn;
-        
-        // Create gradient
-        let gradient = ctx.getContext('2d').createLinearGradient(0, 0, 400, 0);
-        gradient.addColorStop(0, color1);
-        gradient.addColorStop(1, color2);
-
-        new Chart(ctx, {
-        type: 'line',
-        data: {
-        labels: labels,
-        datasets: [{
-            label: name,
-            data: data,
-            fill: false,
-            borderColor: gradient,
-            tension: 0.05
-        }]
-        },
-        options:  {
-            maintainAspectRatio:false
-        }
-        });
     }
 
     data = "{{ data }}";
