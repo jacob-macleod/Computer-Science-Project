@@ -8,10 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/generatePlaceholderData.js"></script>
-    <script src="/static/sharedFunctions.js"></script>
-    <script src="/static/dashboard.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/Favicon.svg">
     <title>Dashboard</title>
 </head>
@@ -83,7 +79,7 @@
 
 </div>
 <script>
-// Set up the functionality for the hamburger menu
+/*// Set up the functionality for the hamburger menu
     hamburgerMenu();
     // Set up the menu bar of the page
     isAdmin = "{{ isAdmin }}";
@@ -171,7 +167,11 @@
         document.getElementById("graphsRow1").style.display = "none";
         document.getElementById("graphsRow2").style.display = "none";   
         document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
-    }
+    }*/
 </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/generatePlaceholderData.js"></script>
+<script src="/static/sharedFunctions.js"></script>
+<script src="/static/dashboard.js"></script>
 </html>
