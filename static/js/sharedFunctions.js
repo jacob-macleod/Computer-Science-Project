@@ -66,18 +66,27 @@ function getCookie(cookieName) {
     * Making the admin indicator blue if the user is an admin
     * Setting the username and farm name
 */
-function setUpMenuBar (isAdmin, firstName) {
-    // Show the correct text on the admin indicator
-    document.cookie = "isAdmin={{ isAdmin }}";
-
+function setUpMenuBar (isAdmin) {
     // Set up farm name and username
-    document.getElementById("firstName").innerHTML = firstName
     document.getElementsByName("username")[0].innerHTML = getCookie("username");
 
     // Make the admin indicator blue if the user is an owner
     if (isAdmin == "True") {
         document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
         document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
+    }
+}
+
+// Fill the datalogger select element with values
+function fillDataloggerSelectElementWithValues() {
+    dataloggersArr = dataloggers.split(",");
+    for (i=0;i<dataloggersArr.length;i++) {
+            if (dataloggersArr[i] != "") {
+            option = document.createElement("option");
+            option.value = dataloggersArr[i];
+            option.innerHTML = dataloggersArr[i];
+            document.getElementById("dataloggerSelector").appendChild(option);
+        }
     }
 }
 

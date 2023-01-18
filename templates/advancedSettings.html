@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/generatePlaceholderData.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
     <title>Advanced Settings</title>
 </head>
@@ -80,187 +78,14 @@
 </div>
 </body>
 <script>
-    // When the user clicks the hamburger icon, change the icon and show the hamburger menu. When the user clicks it again, do the opposite
-    icon = document.getElementById("hamburgerIcon");
-    icon.addEventListener("click", () => {
-        if (icon.getAttribute("src") == "static/Hamburger.svg") {
-	        icon.setAttribute("src", "static/close.svg");
-            document.getElementById("menuItems").style.display = "grid";
-        } else {
-            icon.setAttribute("src", "static/Hamburger.svg")
-            document.getElementById("menuItems").setAttribute("style", "display:none;")
-        }
-    });
-
-    // Delete all cookies
-    function deleteCookies() {
-        var cookies = document.cookie.split(";");
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var value = cookie.indexOf("=");
-            var name = value > -1 ? cookie.substr(0, value) : cookie;
-            // To delete it, make it so it's already expired
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    }
-
-    URLParameters = new URLSearchParams(window.location.search);
-
-    // If no parameters are supplied 
-    // If no start date is supplied, no other paramaters will also be supplied
-    if (URLParameters.get("start") == null) {
-        // Find current day
-        today = new Date();
-        // Find current year
-        year = today.getFullYear();
-        // Find the current month, then add a 0 at the start if teh date is less than 10. So 7 turns to 07
-        month = parseInt(today.getMonth()) + 1;
-        if (month < 10) {
-            month = "0" + month.toString();
-        } else {
-            month = month.toString();
-        }
-
-        // Do the same as we did for the month for the day
-        day = parseInt(today.getDate());
-        if (day < 10) {
-            day = "0" + day.toString();
-        } else {
-            day = day + day.toString();
-        }
-
-        date = year + "-" + month + "-" + day
-        
-        // Make the start date and end date selector show the date for today
-        document.getElementById("startDateSelector").setAttribute("value", date);
-        document.getElementById("endDateSelector").setAttribute("value", date);
-    } else {
-        start = URLParameters.get("start");
-        end = URLParameters.get("end");
-
-        // Start and end are in dd/mm/yyyy format. Convert them to yyyy-mm-dd
-        startDay = start.split("/")[0];
-        startMonth = start.split("/")[1];
-        startYear = start.split("/")[2];
-        startDate = startYear + "-" + startMonth + "-" + startDay;
-
-        endDay = end.split("/")[0];
-        endMonth = end.split("/")[1];
-        endYear = end.split("/")[2];
-        endDate = endYear + "-" + endMonth + "-" + endDay;
-
-        // Make the start date and end date selector show the dates for the data plotted
-        document.getElementById("startDateSelector").setAttribute("value", startDate);
-        document.getElementById("endDateSelector").setAttribute("value", endDate);
-    }
-
-    function logout() {
-        // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
-        deleteCookies();
-        window.open("/", "_self");
-    }
-
-    // Get the value of a cookie by it's name
-    function getCookie(cookieName) {
-        singleCookie = decodeURIComponent(document.cookie).split(";");
-    
-        // Look at every cookie
-        for (i=0;i<singleCookie.length;i++) {
-            // If the cookie's name is right
-            if (singleCookie[i].split("=")[0] == cookieName) {
-                // Return the cookie's value
-                return singleCookie[i].split("=")[1];
-            }
-        }    
-    }
-
-    function loadGraph() {
-        /*day = document.getElementById("dateSelector").value
-        formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
-        datalogger = document.getElementById("dataloggerSelector").value
-        window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")*/
-        datalogger = document.getElementById("dataloggerSelector").value;
-        category = document.getElementById("categorySelector").value;
-        startDate = document.getElementById("startDateSelector").value
-        endDate = document.getElementById("endDateSelector").value
-
-        startDateFormatted = startDate.split("-")[2] + "/" + startDate.split("-")[1] + "/" + startDate.split("-")[0]
-        endDateFormatted = endDate.split("-")[2] + "/" + endDate.split("-")[1] + "/" + endDate.split("-")[0]
-        window.open("/advanced-settings?datalogger=" + datalogger + "&category=" + category + "&start=" + startDateFormatted + "&end=" + endDateFormatted, "_self")
-    }
-    
-    // Set up the page
+    // Set up variables with data loaded from flask
     isAdmin = "{{ isAdmin }}";
     document.cookie = "isAdmin={{ isAdmin }}";
-    document.getElementsByName("username")[0].innerHTML = getCookie("username");
-    if (isAdmin == "True") {
-        document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
-        document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
-    }
-
-    // Fill the datalogger select element with values
     dataloggers = "{{ dataloggers }}";
-    dataloggersArr = dataloggers.split(",");
-    for (i=0;i<dataloggersArr.length;i++) {
-            if (dataloggersArr[i] != "") {
-            option = document.createElement("option");
-            option.value = dataloggersArr[i];
-            option.innerHTML = dataloggersArr[i];
-            document.getElementById("dataloggerSelector").appendChild(option);
-        }
-    }
-    
-
-    // Some pages are hidden by default. If the user is an admin, show them
-    if (isAdmin == "True") {
-        // Get all the items to hide
-        itemsToHide = document.getElementsByName("restrictedItem");
-        for (i=0;i<itemsToHide.length;i++) {
-            // Change their visibility to hidden
-            itemsToHide[i].style = "display: inline-block; visibility:visible;";
-        }
-    }
-
-    // Set up a chart
-    function drawChart(elementToDrawOn, labels, data, color1, color2) {
-        // Set up the light level chart
-        const ctx = elementToDrawOn;
-        
-        // Create gradient
-        let gradient = ctx.getContext('2d').createLinearGradient(0, 0, 400, 0);
-        gradient.addColorStop(0, color1);
-        gradient.addColorStop(1, color2);
-
-        new Chart(ctx, {
-        type: 'line',
-        data: {
-        labels: labels,
-        datasets: [{
-            label: "Graph",
-            data: data,
-            fill: false,
-            borderColor: gradient,
-            tension: 0.05
-        }]
-        },
-        options: {
-            maintainAspectRatio:false
-        }
-        });
-    }
-
     data = "{{ data }}";
-    if (data != "") {
-        dataArr = data.split(",");
-        labels = "{{ labels }}"
-        labelsArr = labels.split(",")
-        console.log(labelsArr)
-
-        drawChart(document.getElementById("graph"), labelsArr, dataArr, "#96F3CC", "#BEBBF7");
-    }  else {
-        // Hide the graph
-        document.getElementById("graphContainer").style.display = "none";   
-        document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
-    }
+    labels = "{{ labels }}"
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/sharedFunctions.js"></script>
+<script src="/static/js/advancedSettings.js"></script>
+</html>

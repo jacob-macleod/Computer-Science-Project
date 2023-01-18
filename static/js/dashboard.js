@@ -1,9 +1,11 @@
 // Set up the functionality for the hamburger menu
 hamburgerMenu();
 // Set up the menu bar of the page
-setUpMenuBar(isAdmin, firstName);
+setUpMenuBar(isAdmin);
 // If the user is an admin, show pages that are restricted by default
 showRestrictedPages(isAdmin);
+// Fill the datalogger select element with values
+fillDataloggerSelectElementWithValues();
 
 // Find current day
 today = new Date();
