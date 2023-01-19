@@ -95,21 +95,21 @@ body {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 15px;
 
     padding-right: 20px;
-    border: 1px solid red;
-    width: max-content;
+    display: inline-block;
+    margin: 0px;
 }
 
 #outlinedButton {
+    position: relative;
     border: 1px solid #827F7F;
     border-radius: 4px;
     cursor: pointer;
     padding: 3px;
     background-color: #FFFFFF;
     color: #827F7F;
-    left: 200px;
+    float: right;
 }
 
 #outlinedButton:hover {
@@ -121,8 +121,9 @@ body {
     display: block;
     padding-left: 10px;
     padding-right: 10px;
-    border: 1px solid red;
     height: fit-content;
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 
 #feedbackText {
