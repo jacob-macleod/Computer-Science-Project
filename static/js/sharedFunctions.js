@@ -12,11 +12,11 @@ function hamburgerMenu () {
     icon.addEventListener("click", () => {
         // Switch the image that it displays to the image
         // Either "Hamburger.svg" or "close.svg" is shown
-        if (icon.getAttribute("src") == "static/Hamburger.svg") {
-	        icon.setAttribute("src", "static/close.svg");
+        if (icon.getAttribute("src") == "static/img/Hamburger.svg") {
+	        icon.setAttribute("src", "static/img/close.svg");
             document.getElementById("menuItems").style.display = "grid";
         } else {
-            icon.setAttribute("src", "static/Hamburger.svg")
+            icon.setAttribute("src", "static/img/Hamburger.svg")
             document.getElementById("menuItems").setAttribute("style", "display:none;")
         }
     });

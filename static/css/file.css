@@ -4,7 +4,7 @@ body {
 
 #mainContentWrapper {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto 1fr;
 }
 
 #graphsRow1 {
@@ -110,6 +110,7 @@ body {
     background-color: #FFFFFF;
     color: #827F7F;
     float: right;
+    font-size: 14px;
 }
 
 #outlinedButton:hover {
@@ -279,6 +280,14 @@ input[type="date"] {
     #feedbackText {
         font-size: 20px;
         line-height: 23px;
+    }
+
+    #itemName {
+        font-size: 20px;
+    }
+
+    #outlinedButton {
+        font-size: 20px;
     }
 
     #subheader {
