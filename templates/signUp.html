@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <script src ="/static/js/generatePassword.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
     <title>Sign Up</title>
 </head>
@@ -67,55 +66,7 @@
     </div>
 </div>
 </body>
-<script>
-    // Get the value of a cookie by it's name
-    function getCookie(cookieName) {
-        singleCookie = decodeURIComponent(document.cookie)
-        singleCookie = singleCookie.toString();
-        singleCookie = singleCookie.split(";");
-
-        // Look at every cookie
-        for (i=0;i<singleCookie.length;i++) {
-            // If the cookie's name is right
-            if (singleCookie[i].split("=")[0] == cookieName) {
-                // Return the cookie's value
-                return singleCookie[i].split("=")[1];
-            }
-        }    
-    }
-
-    // Apply an event listener to all the input boxes
-    inputBoxes = document.querySelectorAll('input');
-
-    // Set the value of the input boxes to equal the equivalent text in the cookie, if the associated feedback text is invisible 
-    if (getCookie("inputBoxText") == undefined) {
-        document.cookie = "inputBoxText=,,,,,,";
-    } else {
-        inputBoxText = getCookie("inputBoxText").split(",");
-        feedbackTexts = document.getElementsByName("feedbackText");
-
-        for (i=0;i<inputBoxText.length-1;i++) {
-            if (feedbackTexts[i].innerHTML == "") {
-                inputBoxes[i].value = inputBoxText[i];
-            }
-        }
-    }
-
-    // When an input box is clicked
-    function onInputBoxClick () {
-        inputBoxText = "";
-
-        // Append the text in all the input boxes to a string
-        for (i=0;i<inputBoxes.length;i++) {
-            inputBoxText = inputBoxText + inputBoxes[i].value + ","
-        }
-
-        // And save that string as the cookie
-        document.cookie = "inputBoxText=" + inputBoxText;
-    }
-    // For every input box add an event listener
-    for (i=0;i<inputBoxes.length;i++) {
-        inputBoxes[i].addEventListener("keyup", () => {onInputBoxClick()});
-    }
-
-</script>
+<script src ="/static/js/sharedFunctions.js"></script>
+<script src ="/static/js/generatePassword.js"></script>
+<script src ="/static/js/signUp.js"></script>
+</html>

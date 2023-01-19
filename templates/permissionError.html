@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/generatePlaceholderData.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
     <title>Configure Devices</title>
 </head>
@@ -46,35 +44,9 @@
     </div>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/sharedFunctions.js"></script>
 <script>
-    // When the user clicks the hamburger icon, change the icon and show the hamburger menu. When the user clicks it again, do the opposite
-    icon = document.getElementById("hamburgerIcon");
-    icon.addEventListener("click", () => {
-        if (icon.getAttribute("src") == "static/Hamburger.svg") {
-	        icon.setAttribute("src", "static/close.svg");
-            document.getElementById("menuItems").style.display = "grid";
-        } else {
-            icon.setAttribute("src", "static/Hamburger.svg")
-            document.getElementById("menuItems").setAttribute("style", "display:none;")
-        }
-    });
-
-        // Delete all cookies
-        function deleteCookies() {
-        var cookies = document.cookie.split(";");
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var value = cookie.indexOf("=");
-            var name = value > -1 ? cookie.substr(0, value) : cookie;
-            // To delete it, make it so it's already expired
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    }
-    
-    function logout() {
-        // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
-        deleteCookies();
-        window.open("/", "_self");
-    }
+    // Set up the functionality for the hamburger menu
+    hamburgerMenu();
 </script>
