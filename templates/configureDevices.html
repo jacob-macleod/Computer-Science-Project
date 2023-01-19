@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/generatePlaceholderData.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
     <title>Configure Devices</title>
 </head>
@@ -59,92 +57,14 @@
 </div>
 </body>
 <script>
-    // Get the value of a cookie by it's name
-    function getCookie(cookieName) {
-        singleCookie = decodeURIComponent(document.cookie).split(";");
-    
-        // Look at every cookie
-        for (i=0;i<singleCookie.length;i++) {
-            // If the cookie's name is right
-            if (singleCookie[i].split("=")[0] == cookieName) {
-                // Return the cookie's value
-                return singleCookie[i].split("=")[1];
-            }
-        }    
-    }
-
-    // When the user clicks the hamburger icon, change the icon and show the hamburger menu. When the user clicks it again, do the opposite
-    icon = document.getElementById("hamburgerIcon");
-    icon.addEventListener("click", () => {
-        if (icon.getAttribute("src") == "static/Hamburger.svg") {
-	        icon.setAttribute("src", "static/close.svg");
-            document.getElementById("menuItems").style.display = "grid";
-        } else {
-            icon.setAttribute("src", "static/Hamburger.svg")
-            document.getElementById("menuItems").setAttribute("style", "display:none;")
-        }
-    });
-
-    // Set up the page
+    // Initialise some variables fileld with data passed from flask
     isAdmin = "{{ isAdmin }}";
     document.cookie = "isAdmin={{ isAdmin }}";
-    document.getElementsByName("username")[0].innerHTML = getCookie("username");
-    if (isAdmin == "True") {
-        document.getElementsByName("adminIndicator")[0].innerHTML = "Owner";
-        document.getElementsByName("adminIndicator")[0].style = "display: inline-block; color: #A6CEE3;";
-    }
-
-        // Delete all cookies
-        function deleteCookies() {
-        var cookies = document.cookie.split(";");
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var value = cookie.indexOf("=");
-            var name = value > -1 ? cookie.substr(0, value) : cookie;
-            // To delete it, make it so it's already expired
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    }
-
     // Find all dataloggers belonging to the user
     //dataloggers = "{{ dataloggers }}".split(",");
-    dataloggers = ["My logger", "Datalogger 2", "Datalogger 3"];
-    // Add an element to the table for each of the dataloggers
-    for (i=0;i<dataloggers.length;i++) {
-        if (dataloggers[i] != "") {
-            // Create the container to hold the datalogger name and remove button
-            container = document.createElement("d");
-            container.id = "tableItem";
-
-            // Create the paragraph which holds the datalogger name
-            deviceName = document.createElement("p");
-            deviceName.innerHTML = dataloggers[i];
-            deviceName.id = "itemName";
-
-            // Create the button used to remove the datalogger
-            button = document.createElement("button");
-            button.innerHTML = "Remove";
-            button.setAttribute("onclick", "removeDatalogger()");
-            button.setAttribute("name", dataloggers[i]);
-            button.id = "outlinedButton";
-
-            // Append deviceName and button to the container
-            container.appendChild(deviceName);
-            container.appendChild(button);
-
-            // Append the container to the table
-            document.getElementById("table").appendChild(container);
-        }
-    }
-
-    function removeDatalogger() {
-        alert ("clicked")
-    }
-
-    function logout() {
-        // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
-        deleteCookies();
-        window.open("/", "_self");
-    }
+    dataloggers = ["logger1", "my logger", "logger3"];
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/sharedFunctions.js"></script>
+<script src="/static/js/configureDevices.js"></script>
+</html>
