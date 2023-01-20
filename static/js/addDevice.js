@@ -6,5 +6,6 @@ setUpMenuBar(isAdmin);
 showRestrictedPages(isAdmin);
 
 function addDevice() {
-    alert ("clicked");
+    deviceName = document.getElementById('inputBoxText').value; 
+    window.open("/add-device?deviceName=" + deviceName, "_self");
 }

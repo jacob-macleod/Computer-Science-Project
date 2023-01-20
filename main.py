@@ -161,7 +161,7 @@ def configureDevices() :
 
 
 # When the add-devices page is loaded
-@app.route("/add-device")
+@app.route("/add-device", methods=["POST", "GET"])
 def addDevices() :
      # If the user has logged in before
     if (request.cookies.get("username") != None) :
@@ -170,6 +170,7 @@ def addDevices() :
         # If the user is an admin
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
+            print ("name " + request.args.get("dataloggerName"))
             return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
         else :
             return render_template("permissionError.html")
