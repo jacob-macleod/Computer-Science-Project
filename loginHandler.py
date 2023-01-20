@@ -71,3 +71,37 @@ def getFarmID(username) :
 
 def getDataloggerID(dataloggerName) :
     return findValue(dataloggerName, "database/dataloggerTable.csv", 2, 0)
+
+# Remove a datalogger
+def removeDatalogger(dataloggerName) :
+    dataloggerID = getDataloggerID(dataloggerName)
+    dataloggerTable = []
+    dataTable = []
+
+    # Read the dataloggerTable.csv file and save each row to an array. If dataloggerName is found, don't save that row
+    with open("database/dataloggerTable.csv", "r") as file:
+        for line in file:
+            lineArr = line.split(",")
+            if decrypt(lineArr[2]) != dataloggerName:
+                dataloggerTable.append(lineArr[0] + "," + lineArr[1] + "," + lineArr[2])
+
+    # Rewrite the dataloggerTable array back to the file
+    with open("database/dataloggerTable.csv", "w") as file:
+        for i in range(0, len(dataloggerTable)) :
+            file.write(dataloggerTable[i])
+
+    # Read the dataTable.csv file and save each row to an array. If dataloggerName is found, don't save that row
+    with open("database/dataTable.csv", "r") as file:
+        for line in file:
+            lineArr = line.split(",")
+            if decrypt(lineArr[0]) != dataloggerID:
+                dataTable.append(lineArr[0] + "," + lineArr[1] + "," + lineArr[2] + "," + lineArr[3] + "," + lineArr[4] + "," + lineArr[5] + "," + lineArr[6] + "," + lineArr[7])
+    
+
+    # Rewrite the dataloggerTable array back to the file
+    with open("database/dataTable.csv", "w") as file:
+        for i in range(0, len(dataTable)) :
+            file.write(dataTable[i])
+
+            
+removeDatalogger("Main Datalogger")

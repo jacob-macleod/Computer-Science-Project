@@ -186,6 +186,31 @@ def addDevices() :
     else :
         return render_template("signIn.html")
 
+# When the user goes to the remove-device page
+@app.route("/remove-device", methods=["POST", "GET"])
+def removeDevice() :
+     # If the user has logged in before
+    if (request.cookies.get("username") != None) :
+        username = request.cookies.get("username")
+        isAdmin = False
+
+        # If the user is an admin
+        if checkIfValueIsUsed(username, "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+
+            # Find the name of the datalogger that the user has chosen to delete
+            dataloggerName = request.args.get("deviceName")
+            if dataloggerName != None:
+                # Delete the datalogger
+                # Return the configure devices page
+                return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+
+            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(username)), farmName=getFarmName(request.cookies.get("username")))
+        else :
+            return render_template("permissionError.html")
+    else :
+        return render_template("signIn.html")
+
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():

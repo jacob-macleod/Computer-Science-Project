@@ -34,5 +34,6 @@ for (i=0;i<dataloggers.length;i++) {
 }
 
 function removeDatalogger() {
-    alert ("clicked");
+    deviceName = event.target.name;
+    window.open("/remove-device?deviceName=" + deviceName, "_self");
 }
