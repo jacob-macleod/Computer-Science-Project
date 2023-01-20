@@ -159,6 +159,23 @@ def configureDevices() :
     else :
         return render_template("signIn.html")
 
+
+# When the add-devices page is loaded
+@app.route("/add-device")
+def addDevices() :
+     # If the user has logged in before
+    if (request.cookies.get("username") != None) :
+        isAdmin = False
+
+        # If the user is an admin
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+        else :
+            return render_template("permissionError.html")
+    else :
+        return render_template("signIn.html")
+
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():

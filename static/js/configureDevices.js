@@ -36,7 +36,3 @@ for (i=0;i<dataloggers.length;i++) {
 function removeDatalogger() {
     alert ("clicked");
 }
-
-function addNewDevice() {
-    alert ("addNewDevice");
-}
