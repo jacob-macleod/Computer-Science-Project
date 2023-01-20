@@ -4,3 +4,7 @@ hamburgerMenu();
 setUpMenuBar(isAdmin);
 // If the user is an admin, show pages that are restricted by default
 showRestrictedPages(isAdmin);
+
+function addDevice() {
+    alert ("clicked");
+}

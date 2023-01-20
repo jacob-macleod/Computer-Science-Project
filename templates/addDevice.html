@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
-    <title>Configure Devices</title>
+    <title>Add Device</title>
 </head>
 <body>
     
@@ -45,11 +45,16 @@
     
 <div id="mainContentWrapper">  
     <div>
-        <img id="image" src="static/img/adminWorking.png">
+        <img id="image" src="static/img/idea.png">
     </div>
 
     <div>
         <p id="header">Add Device</p>
+        <p id="normalText">This page lets you add your own datalogging device. Want to <a style="color:827F7F;" href="/configure-devices">go back</a> instead?</p>
+        <p id="normalText" style="display:inline-block;">Device Name</p>
+        <input placeholder = "Enter name here" id = "inputBoxText"></input>
+        <br>
+        <button id="button" onclick="addDevice();">Add Datalogger</button>
     </div>
 </div>
 </body>
@@ -63,5 +68,5 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/js/sharedFunctions.js"></script>
-<script src="/static/js/configureDevices.js"></script>
+<script src="/static/js/addDevice.js"></script>
 </html>
