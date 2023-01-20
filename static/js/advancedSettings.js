@@ -62,13 +62,13 @@ function loadGraph() {
     // Find the details needed to dsiplay the graph
     datalogger = document.getElementById("dataloggerSelector").value;
     category = document.getElementById("categorySelector").value;
-    startDate = document.getElementById("startDateSelector").value
-    endDate = document.getElementById("endDateSelector").value
+    startDate = document.getElementById("startDateSelector").value;
+    endDate = document.getElementById("endDateSelector").value;
 
     // Load a the new /advanced-settings? page rather than /advanced-settings and add parameters to make the server return the code
-    startDateFormatted = startDate.split("-")[2] + "/" + startDate.split("-")[1] + "/" + startDate.split("-")[0]
-    endDateFormatted = endDate.split("-")[2] + "/" + endDate.split("-")[1] + "/" + endDate.split("-")[0]
-    window.open("/advanced-settings?datalogger=" + datalogger + "&category=" + category + "&start=" + startDateFormatted + "&end=" + endDateFormatted, "_self")
+    startDateFormatted = startDate.split("-")[2] + "/" + startDate.split("-")[1] + "/" + startDate.split("-")[0];
+    endDateFormatted = endDate.split("-")[2] + "/" + endDate.split("-")[1] + "/" + endDate.split("-")[0];
+    window.open("/advanced-settings?datalogger=" + datalogger + "&category=" + category + "&start=" + startDateFormatted + "&end=" + endDateFormatted, "_self");
 }
 
 if (data != "") {

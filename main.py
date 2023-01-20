@@ -165,13 +165,22 @@ def configureDevices() :
 def addDevices() :
      # If the user has logged in before
     if (request.cookies.get("username") != None) :
+        username = request.cookies.get("username")
         isAdmin = False
 
         # If the user is an admin
-        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+        if checkIfValueIsUsed(username, "database/owners.csv", 4) == "FAIL":
             isAdmin = True
-            print ("name " + request.args.get("dataloggerName"))
-            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+
+            # Find the name of the datalogger that the user has chosen
+            dataloggerName = request.args.get("deviceName")
+            if dataloggerName != None:
+                # Save all required data for the datalogger
+                savePlaceholderData (153, str(getFarmID(username)), dataloggerName, str(generateID("database/dataloggerTable.csv")))
+                # Return the configure devices page
+                return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+
+            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(username)), farmName=getFarmName(request.cookies.get("username")))
         else :
             return render_template("permissionError.html")
     else :
