@@ -40,17 +40,6 @@ function changeDaySelected() {
 }
 
 
-// Fill the datalogger select element with values
-dataloggersArr = dataloggers.split(",");
-for (i=0;i<dataloggersArr.length;i++) {
-        if (dataloggersArr[i] != "") {
-        option = document.createElement("option");
-        option.value = dataloggersArr[i];
-        option.innerHTML = dataloggersArr[i];
-        document.getElementById("dataloggerSelector").appendChild(option);
-    }
-}
-
 if (data != "") {
     dataArr = data.split("*");
     date = dataArr.pop();
