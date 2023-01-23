@@ -7,6 +7,14 @@ body {
   grid-template-columns: auto auto 1fr;
 }
 
+#categorySelector {
+    font-size: 18px;
+}
+
+#dataloggerSelector {
+    font-size: 18px;
+}
+
 #graphsRow1 {
     display: grid;
     grid-template-columns: auto auto;
@@ -42,6 +50,7 @@ body {
     font-weight: 400;
     padding-right: 20px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 #informationMenuItem {
@@ -50,6 +59,7 @@ body {
     padding-right: 20px;
 
     color: #d3d0d0;
+    font-size: 18px;
 }
 
 
@@ -65,6 +75,7 @@ body {
     text-align:center;
     font-family: 'Open Sans';
     font-weight: 400;
+    font-size: 18px;
 }
 
 #unselectedMenuItem:hover {
@@ -75,8 +86,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 34px;
-    line-height: 44px;
+    font-size: 38px;
     color: #000000;
 }
 
@@ -84,8 +94,7 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+    font-size: 18px;
     color: #827F7F;
 }
 
@@ -94,7 +103,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 18px;
 
     padding-right: 20px;
     display: inline-block;
@@ -106,11 +115,11 @@ body {
     border: 1px solid #827F7F;
     border-radius: 4px;
     cursor: pointer;
-    padding: 3px;
+    padding: 5px;
     background-color: #FFFFFF;
     color: #827F7F;
     float: right;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 #outlinedButton:hover {
@@ -123,16 +132,15 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     height: fit-content;
-    padding-bottom: 6px;
-    padding-top: 6px;
+    padding-bottom: 9px;
+    padding-top: 9px;
 }
 
 #feedbackText {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+    font-size: 18px;
     color: #A6CEE3;
 }
 
@@ -140,7 +148,7 @@ body {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 22px;
     line-height: 22px;
     
     color: #000000;
@@ -162,42 +170,38 @@ input[type="date"] {
     background: #FFFFFF;
     border: 1px solid #D0D0D0;
     border-radius: 4px;
+    font-size: 18px;
 }
 
 #inputBoxText {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+    font-size: 18px;
     color: #827F7F;
 
     background: #FFFFFF;
     border: 0.5px solid #D0D0D0;
     border-radius: 4px;
-    height: 20px;
 }
 
 #passwordInputBox {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+    font-size: 18px;
     color: #827F7F;
 
     background: #FFFFFF;
     border: 0.5px solid #D0D0D0;
     border-radius: 4px;
-    height: 20px;
 }
 
 #passwordConfirmationInputBox {
     font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+    font-size: 18px;
     color: #827F7F;
 
     background: #FFFFFF;
@@ -210,8 +214,7 @@ input[type="date"] {
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 16px;
     
     color: #D0D0D0;
 }
@@ -221,13 +224,12 @@ input[type="date"] {
     border-radius: 4px;
     cursor: pointer;
     border: none;
-    padding: 5px;
+    padding: 7px;
 
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 18px;
     
     color: #FFFFFF;
 }
