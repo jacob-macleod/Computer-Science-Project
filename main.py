@@ -202,6 +202,7 @@ def removeDevice() :
             dataloggerName = request.args.get("deviceName")
             if dataloggerName != None:
                 # Delete the datalogger
+                removeDatalogger(dataloggerName)
                 # Return the configure devices page
                 return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
 

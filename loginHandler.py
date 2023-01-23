@@ -102,6 +102,3 @@ def removeDatalogger(dataloggerName) :
     with open("database/dataTable.csv", "w") as file:
         for i in range(0, len(dataTable)) :
             file.write(dataTable[i])
-
-            
-removeDatalogger("Main Datalogger")
