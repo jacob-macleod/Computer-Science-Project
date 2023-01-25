@@ -57,7 +57,7 @@ def advancedSettings () :
 
         data = ""
         labels = ""
-
+        
         # If arguments have been supplied
         if request.args.get("datalogger") != None:
             # Save the results of the arguments
@@ -67,7 +67,7 @@ def advancedSettings () :
             endDate = request.args.get("end")
             dataloggerID = getDataloggerID(dataloggerName)
 
-            labels = generateLabels(startDate, endDate)
+            labels = generateLabels(startDate, endDate, dataloggerID)
 
             data = getDataForTimePeriod (dataloggerID, category, startDate, endDate)
             

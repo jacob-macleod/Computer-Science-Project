@@ -134,7 +134,7 @@ def getDataForTimePeriod (dataloggerID, category, startDate, endDate) :
 
     return individualdataPoints
 
-def generateLabels(startDate, endDate) :
+def generateLabels(startDate, endDate, dataloggerID) :
     # Convert the start and end dates to date time format
     startDate = datetime.strptime(startDate, "%d/%m/%Y")
     endDate = datetime.strptime(endDate, "%d/%m/%Y")
@@ -149,11 +149,14 @@ def generateLabels(startDate, endDate) :
     with open("database/dataTable.csv", 'r') as file:
         for line in file:
             for day in dates:
+                # If the day == the current day
                 if decrypt(line.split(",")[1]) == day.strftime("%d/%m/%Y"):
-                    day = decrypt(line.split(",")[1])
-                    day = day.split("/")[0] + "/" + day.split("/")[1]
-                    listOfDays = listOfDays + day + " " + decrypt(line.split(",")[2]) + ","
-
+                    # If the data for this day and time is owned by the correct datalogger
+                    if decrypt(line.split(",")[0]) == dataloggerID :
+                        print (decrypt(line.split(",")[1]))
+                        day = decrypt(line.split(",")[1])
+                        day = day.split("/")[0] + "/" + day.split("/")[1]
+                        listOfDays = listOfDays + day + " " + decrypt(line.split(",")[2]) + ","
     return listOfDays
 
 # generates labels for today
