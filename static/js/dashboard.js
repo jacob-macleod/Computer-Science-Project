@@ -27,16 +27,16 @@ if (day < 10) {
     day = day + day.toString();
 }
 
-date = year + "-" + month + "-" + day
+date = year + "-" + month + "-" + day;
 
 // Make the date selector show the date for today
 document.getElementById("dateSelector").setAttribute("value", date);
 
 function changeDaySelected() {
-    day = document.getElementById("dateSelector").value
-    formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0]
-    datalogger = document.getElementById("dataloggerSelector").value
-    window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self")
+    day = document.getElementById("dateSelector").value;
+    formattedDay = day.split("-")[2] + "/" + day.split("-")[1] + "/" + day.split("-")[0];
+    datalogger = document.getElementById("dataloggerSelector").value;
+    window.open("/getDay?day=" + formattedDay + "&datalogger=" + datalogger, "_self");
 }
 
 

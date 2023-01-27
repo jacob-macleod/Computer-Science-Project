@@ -1,0 +1,3 @@
+function togglePasswordVisibility () {
+    alert ("clicked");
+}

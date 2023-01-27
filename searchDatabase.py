@@ -188,6 +188,6 @@ def generateLabelsForToday(farmID):
         if loadDataForSpecificDay(day, dataloggerID) == [] :
             i = i + 1
         else:
-            labels = generateLabels(day, day)
+            labels = generateLabels(day, day, dataloggerID)
             i = 101  
     return labels

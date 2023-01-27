@@ -91,7 +91,7 @@ def getDay () :
         dataloggerID = getDataloggerID(dataloggerName)
         data = loadAndFormatDataForSpecificDay(day, dataloggerID)
 
-        labels = generateLabels(day, day)
+        labels = generateLabels(day, day, dataloggerID)
 
         return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), labels=labels)
     else :

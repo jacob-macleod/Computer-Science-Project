@@ -34,7 +34,8 @@
                 <br>
                 
                 <p style="display: inline-block;"  id = "normalText">Password</p>
-                <input placeholder="********" name="password" id = "inputBoxText"></input>
+                <input style="display: inline-grid;" placeholder="********" name="password" id = "inputBoxText"></input>
+                <button id="button" onclick="togglePasswordVisibility()">Show Password</button>
                 <p name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
                 
                 <br> 
@@ -44,5 +45,5 @@
         </div>
     </div>
 </div>
-
+<script src="/static/js/signIn.js"></script>
 </body>
