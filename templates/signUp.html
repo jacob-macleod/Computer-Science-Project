@@ -44,12 +44,13 @@
                 <br>
                 
                 <p style="display: inline-block;"  id = "normalText">Password</p>
-                <input style="display: inline-block;" placeholder="********" class="password" name="password" id = "passwordInputBox"></input>
+                <input type="password" style="display: inline-block;" placeholder="********" class="password" name="password" id = "passwordInputBox"></input>
                 <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
+                <button type="button" id="button" onclick="togglePasswordVisibility()" name="togglePassword">Show Password</button>
                 <br>
 
                 <p style="display: inline-block;"  id = "normalText">Password Confirmation</p>
-                <input style="display: inline-block;" placeholder="********" name="passwordConfirmation" id = "passwordConfirmationInputBox"></input>
+                <input type="password" style="display: inline-block;" placeholder="********" name="passwordConfirmation" id = "passwordConfirmationInputBox"></input>
                 <p style="display: inline-block;" name="feedbackText" id="feedbackText">{{ passwordFeedbackText }}</p>
                 <button type="button" onclick="var password = generatePassword(); document.getElementById('passwordInputBox').value = password; document.getElementById('passwordConfirmationInputBox').value = password;" id="button">Generate a Password</button>
                 <br>
