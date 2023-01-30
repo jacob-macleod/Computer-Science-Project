@@ -163,6 +163,7 @@ def configureDevices() :
 # When the add-devices page is loaded
 @app.route("/add-device", methods=["POST", "GET"])
 def addDevices() :
+    feedbackText = ""
      # If the user has logged in before
     if (request.cookies.get("username") != None) :
         username = request.cookies.get("username")
@@ -175,12 +176,18 @@ def addDevices() :
             # Find the name of the datalogger that the user has chosen
             dataloggerName = request.args.get("deviceName")
             if dataloggerName != None:
-                # Save all required data for the datalogger
-                savePlaceholderData (153, str(getFarmID(username)), dataloggerName, str(generateID("database/dataloggerTable.csv")))
-                # Return the configure devices page
-                return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+                # Apply the neccesary checks
+                feedbackText = applyChecksToDataloggerName(dataloggerName)
+                
+                # If there are no errors:
+                if feedbackText == "" :
+                    # Save all required data for the datalogger
+                    savePlaceholderData (153, str(getFarmID(username)), dataloggerName, str(generateID("database/dataloggerTable.csv")))
 
-            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(username)), farmName=getFarmName(request.cookies.get("username")))
+                    # Return the configure devices page
+                    return render_template("configureDevices.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), farmName=getFarmName(request.cookies.get("username")))
+
+            return render_template("addDevice.html", isAdmin=isAdmin, dataloggers=findDataloggersOwnedByFarmID(getFarmID(username)), farmName=getFarmName(request.cookies.get("username")), feedbackText=feedbackText)
         else :
             return render_template("permissionError.html")
     else :

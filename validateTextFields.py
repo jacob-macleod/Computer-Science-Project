@@ -1,4 +1,5 @@
 # Apply the validationChecks in validationTests.py to different items
+from tabnanny import check
 from validationTests import *
 
 
@@ -17,6 +18,7 @@ def applyChecksToUsername(username, allowedCharacters):
 
     return messageToReturn
 
+# Apply the required checks to the name input field
 def applyChecksToName(name, allowedCharacters) :
     messageToReturn = ""
     if presenceCheck(name) != "PASS" :
@@ -26,6 +28,7 @@ def applyChecksToName(name, allowedCharacters) :
 
     return messageToReturn
 
+# Apply the required checks to the password input field
 def applyChecksToPassword(password, passwordConfirmation) :
     messageToReturn = ""
 
@@ -40,7 +43,7 @@ def applyChecksToPassword(password, passwordConfirmation) :
 
     return messageToReturn
 
-
+# Apply the required checks to the farm name input field
 def applyChecksToFarmName(farmName, allowedCharacters) :
     messageToReturn = ""
 
@@ -50,5 +53,17 @@ def applyChecksToFarmName(farmName, allowedCharacters) :
         messageToReturn = "Sorry, the only allowed characters are " + allowedCharacters
     if checkIfValueIsUsed(farmName, "database/farmTable.csv", 1) != "PASS" :
         messageToReturn = "Sorry, that name has already been used"
+
+    return messageToReturn
+
+# Apply the required checks to the datalogger input field
+def applyChecksToDataloggerName(dataloggerName) :
+    messageToReturn = ""
+    if presenceCheck(dataloggerName) != "PASS" :
+        messageToReturn = "Sorry, you need to enter the datalogger name"
+    if checkForAllowedCharacters(dataloggerName, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM- _") != "PASS" :
+        messageToReturn = "Sorry, only alphabetical characters, spaces, _ and – are allowed"
+    if checkIfValueIsUsed(dataloggerName, "database/dataloggerTable.csv", 2) != "PASS":
+        messageToReturn = "Sorry, there already is a datalogger with that name"
 
     return messageToReturn
