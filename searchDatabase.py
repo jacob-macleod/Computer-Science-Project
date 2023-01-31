@@ -1,6 +1,7 @@
 # A file of functions to search the database
 from datetime import datetime, timedelta
 from encryption import *
+from loginHandler import findValue
 
 
 # Search dataTable.csv to find the data for the specifc day
@@ -96,6 +97,11 @@ def findDataloggersOwnedByFarmID(farmID) :
                 dataloggers = dataloggers + (decrypt(line.split(",")[2])) + ","
     
     return dataloggers
+
+# Finds all the workers owned by an admin/farm owner
+def findWorkersOwnedByOwner(username) :
+    id = findValue(username, "database/owners.csv", 4, 0)
+    #TODO: Complete
 
 
 # Get the data for a specifc data logger for a specific category over a specific time period
