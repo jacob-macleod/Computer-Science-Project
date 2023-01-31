@@ -228,7 +228,7 @@ def manageUsers() :
         # If the user is an admin
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
-            return render_template("manageUsers.html")
+            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")))
         else :
             return render_template("permissionError.html")
     else :
