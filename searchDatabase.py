@@ -101,7 +101,17 @@ def findDataloggersOwnedByFarmID(farmID) :
 # Finds all the workers owned by an admin/farm owner
 def findWorkersOwnedByOwner(username) :
     id = findValue(username, "database/owners.csv", 4, 0)
-    #TODO: Complete
+    workers = []
+    
+    # Look every worjer in workersTable
+    # If the worker is owned by username, add their name to an array
+    with open("database/workerTable.csv") as workerTable:
+        for line in workerTable:
+            lineArr = line.split(",")
+            if decrypt(str(line[1])) == id:
+                workers.append(decrypt(str(line[0])))
+
+    return workers
 
 
 # Get the data for a specifc data logger for a specific category over a specific time period
