@@ -250,6 +250,38 @@ def addWorker() :
     else :
         return render_template("signIn.html")
 
+@app.route("/make-worker", methods=["POST", "GET"])
+def makeWorker() :
+    feedbackText = ""
+     # If the user has logged in before
+    if (request.cookies.get("username") != None) :
+        username = request.cookies.get("username")
+        isAdmin = False
+
+        # If the user is an admin
+        if checkIfValueIsUsed(username, "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+
+            firstName = request.args.get("firstName")
+            lastName = request.args.get("lastName")
+            username = request.args.get("username")
+            password = request.args.get("password")
+            passwordConfirmation = request.args.get("passwordConfirmation")
+
+            print (firstName)
+            print (lastName)
+            print (username)
+            print (password)
+            print (passwordConfirmation)
+            # Apply checks and save user
+
+            # Return the configure devices page
+            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")))
+        else :
+            return render_template("permissionError.html")
+    else :
+        return render_template("signIn.html")
+
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():

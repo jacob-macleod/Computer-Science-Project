@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/img/Favicon.svg">
+    <script src="/static/js/generatePassword.js"></script>
     <title>Add Device</title>
 </head>
 <body>
@@ -52,9 +53,27 @@
         <p id="header">Add New Worker</p>
         <p id="normalText">This page lets you your workers to the system to view graphs. Want to <a style="color:827F7F;" href="/configure-devices">go back</a> instead?</p>
         <p id="normalText" style="display:inline-block;">First Name</p>
-        <input placeholder = "Enter first name here" id = "inputBoxText"></input>
-        <p id="feedbackText">{{ feedbackText }}</p>
-        <br>
+        <input name="firstName" style="display:inline-block;" placeholder = "Enter first name here" id = "inputBoxText"></input>
+        <p id="feedbackText">{{ firstNameFeedbackText }}</p>
+
+        <p id="normalText" style="display:inline-block;">Last Name</p>
+        <input name="lastName" style="display:inline-block;" placeholder = "Enter last name here" id = "inputBoxText"></input>
+        <p id="feedbackText">{{ lastNameFeedbackText }}</p>
+
+        <p id="normalText" style="display:inline-block;">Username</p>
+        <input name="username" style="display:inline-block;" placeholder = "Enter username name here" id = "inputBoxText"></input>
+        <p id="feedbackText">{{ usernameFeedbackText }}</p>
+
+        <p id="normalText" style="display:inline-block;">Password</p>
+        <input style="display:inline-block;" name="password" type="password" placeholder = "********" id = "passwordInputBox"></input>
+        <button type="button" id="button" onclick="togglePasswordVisibility()" name="togglePassword">Show Password</button>
+        <p id="feedbackText">{{ passwordFeedbackText }}</p>
+
+        <p id="normalText" style="display:inline-block;">Password Confirmation</p>
+        <input style="display:inline-block;" name="passwordConfirmation" type="password" placeholder = "********" id = "passwordConfirmationInputBox"></input>
+        <button type="button" onclick="var password = generatePassword(); document.getElementById('passwordInputBox').value = password; document.getElementById('passwordConfirmationInputBox').value = password;" id="button">Generate a Password</button>
+        <p id="feedbackText">{{ passwordFeedbackText }}</p>
+
         <button id="button" onclick="addWorker();">Add Worker</button>
     </div>
 </div>
@@ -66,5 +85,5 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/js/sharedFunctions.js"></script>
-<script src="/static/js/addDevice.js"></script>
+<script src="/static/js/addWorker.js"></script>
 </html>
