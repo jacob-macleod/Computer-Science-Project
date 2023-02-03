@@ -236,7 +236,7 @@ def manageUsers() :
 
 
 @app.route("/add-worker")
-def manageUsers() :
+def addWorker() :
     # If the user has logged in before
     if (request.cookies.get("username") != None) :
         isAdmin = False
