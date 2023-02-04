@@ -268,11 +268,6 @@ def makeWorker() :
             password = request.args.get("password")
             passwordConfirmation = request.args.get("passwordConfirmation")
 
-            print (firstName)
-            print (lastName)
-            print (username)
-            print (password)
-            print (passwordConfirmation)
             # Apply checks and save user
 
             # Return the configure devices page
