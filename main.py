@@ -269,7 +269,11 @@ def makeWorker() :
             passwordConfirmation = request.args.get("passwordConfirmation")
 
             # Apply checks and save user
-
+            firstNameFeedbackText = applyChecksToName(firstName, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM")
+            lastNameFeedbackText = applyChecksToName(lastName, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM -")
+            usernameFeedbackText = applyChecksToUsername(username, "qwertyuiopasdfghjklzxcvbnm-_,.")
+            passwordFeedbackText = applyChecksToPassword(password, passwordConfirmation)
+    
             # Return the configure devices page
             return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")))
         else :
