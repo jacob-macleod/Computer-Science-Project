@@ -261,7 +261,8 @@ def makeWorker() :
         # If the user is an admin
         if checkIfValueIsUsed(username, "database/owners.csv", 4) == "FAIL":
             isAdmin = True
-
+            
+            # Get details passed through url
             firstName = request.args.get("firstName")
             lastName = request.args.get("lastName")
             username = request.args.get("username")
@@ -274,8 +275,12 @@ def makeWorker() :
             usernameFeedbackText = applyChecksToUsername(username, "qwertyuiopasdfghjklzxcvbnm-_,.")
             passwordFeedbackText = applyChecksToPassword(password, passwordConfirmation)
     
-            # Return the configure devices page
-            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")))
+            # If there are no issues with the details entered by the user
+            if firstNameFeedbackText + lastNameFeedbackText + usernameFeedbackText + passwordFeedbackText == "":
+                # Return the configure devices page
+                return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
+            else :
+                return render_template("addWorker.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
         else :
             return render_template("permissionError.html")
     else :
