@@ -265,18 +265,22 @@ def makeWorker() :
             # Get details passed through url
             firstName = request.args.get("firstName")
             lastName = request.args.get("lastName")
-            username = request.args.get("username")
+            workerUsername = request.args.get("username")
             password = request.args.get("password")
             passwordConfirmation = request.args.get("passwordConfirmation")
 
             # Apply checks and save user
             firstNameFeedbackText = applyChecksToName(firstName, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM")
             lastNameFeedbackText = applyChecksToName(lastName, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM -")
-            usernameFeedbackText = applyChecksToUsername(username, "qwertyuiopasdfghjklzxcvbnm-_,.")
+            usernameFeedbackText = applyChecksToUsername(workerUsername, "qwertyuiopasdfghjklzxcvbnm-_,.")
             passwordFeedbackText = applyChecksToPassword(password, passwordConfirmation)
     
             # If there are no issues with the details entered by the user
             if firstNameFeedbackText + lastNameFeedbackText + usernameFeedbackText + passwordFeedbackText == "":
+                # Create the worker
+                ownerID = findValue(username, "database/owners.csv", 4, 1)
+                createWorker(workerUsername, firstName, lastName, password, ownerID)
+
                 # Return the configure devices page
                 return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
             else :
