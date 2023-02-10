@@ -54,25 +54,25 @@
         <p id="normalText">This page lets you your workers to the system to view graphs. Want to <a style="color:827F7F;" href="/configure-devices">go back</a> instead?</p>
         <p id="normalText" style="display:inline-block;">First Name</p>
         <input name="firstName" style="display:inline-block;" placeholder = "Enter first name here" id = "inputBoxText"></input>
-        <p id="feedbackText">{{ firstNameFeedbackText }}</p>
+        <p id="feedbackText" name="feedbackText">{{ firstNameFeedbackText }}</p>
 
         <p id="normalText" style="display:inline-block;">Last Name</p>
         <input name="lastName" style="display:inline-block;" placeholder = "Enter last name here" id = "inputBoxText"></input>
-        <p id="feedbackText">{{ lastNameFeedbackText }}</p>
+        <p id="feedbackText" name="feedbackText">{{ lastNameFeedbackText }}</p>
 
         <p id="normalText" style="display:inline-block;">Username</p>
         <input name="username" style="display:inline-block;" placeholder = "Enter username name here" id = "inputBoxText"></input>
-        <p id="feedbackText">{{ usernameFeedbackText }}</p>
+        <p id="feedbackText" name="feedbackText">{{ usernameFeedbackText }}</p>
 
         <p id="normalText" style="display:inline-block;">Password</p>
         <input style="display:inline-block;" name="password" type="password" placeholder = "********" id = "passwordInputBox"></input>
         <button type="button" id="button" onclick="togglePasswordVisibility()" name="togglePassword">Show Password</button>
-        <p id="feedbackText">{{ passwordFeedbackText }}</p>
+        <p id="feedbackText" name="feedbackText">{{ passwordFeedbackText }}</p>
 
         <p id="normalText" style="display:inline-block;">Password Confirmation</p>
         <input style="display:inline-block;" name="passwordConfirmation" type="password" placeholder = "********" id = "passwordConfirmationInputBox"></input>
         <button type="button" onclick="var password = generatePassword(); document.getElementById('passwordInputBox').value = password; document.getElementById('passwordConfirmationInputBox').value = password;" id="button">Generate a Password</button>
-        <p id="feedbackText">{{ passwordFeedbackText }}</p>
+        <p id="feedbackText" name="feedbackText">{{ passwordFeedbackText }}</p>
 
         <button id="button" onclick="addWorker();">Add Worker</button>
     </div>
