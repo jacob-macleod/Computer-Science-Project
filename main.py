@@ -228,7 +228,7 @@ def manageUsers() :
         # If the user is an admin
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
-            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkerUsernamesOwnedByOwner(request.cookies.get("username")))
+            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), usernames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 4), firstNames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 2), lastNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 3))
         else :
             return render_template("permissionError.html")
     else :
@@ -281,8 +281,10 @@ def makeWorker() :
                 ownerID = findValue(username, "database/owners.csv", 4, 1)
                 createWorker(workerUsername, firstName, lastName, password, ownerID)
 
-                # Return the configure devices page
-                return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
+                # Return the configure devices page and clear the workerInputBoxCookie
+                configureDevices = make_response(render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText))
+                configureDevices.set_cookie("workerInputBoxText", ",,,,,")
+                return configureDevices
             else :
                 return render_template("addWorker.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
         else :

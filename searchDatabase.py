@@ -98,8 +98,8 @@ def findDataloggersOwnedByFarmID(farmID) :
     
     return dataloggers
 
-# Finds all the workers owned by an admin/farm owner
-def findWorkerUsernamesOwnedByOwner(username) :
+# Find the rows in WorkerTable belonging to all workers owned by the user, and return a specific collum in the rows found
+def findDetailsOfWorkersOwnedByOwner(username, columnToReturn) :
     id = findValue(username, "database/owners.csv", 4, 0)
     workers = []
     
@@ -110,7 +110,7 @@ def findWorkerUsernamesOwnedByOwner(username) :
             lineArr = line.split(",")
             print (decrypt(str(lineArr[1])))
             if decrypt(str(lineArr[1])) == id:
-                workers.append(decrypt(str(lineArr[4])))
+                workers.append(decrypt(str(lineArr[columnToReturn])))
 
     return workers
 
