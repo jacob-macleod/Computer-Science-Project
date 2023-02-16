@@ -40,3 +40,9 @@ for (i=0;i<usernames.length;i++) {
         document.getElementById("table").appendChild(container);
     }
 }
+
+// Remove the worker with the username equal to the name of the button
+function removeWorker() {
+    workerUsername = event.target.name;
+    alert (workerUsername);
+}
