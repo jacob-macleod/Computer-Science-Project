@@ -109,7 +109,7 @@ def createWorker(username, firstName, lastName, password, ownerID) :
     workerID = generateID("database/workerTable.csv")
 
     # Define the line to append to create the worker
-    lineToAppend = encrypt(str(workerID)) + "," + encrypt(str(ownerID)) + "," + encrypt(firstName) + "," + encrypt(lastName) + "," + encrypt(password) + "\n"
+    lineToAppend = encrypt(str(workerID)) + "," + encrypt(str(ownerID)) + "," + encrypt(firstName) + "," + encrypt(lastName) + "," + encrypt(username) + "," + encrypt(password) + "\n"
 
     # Append lineToAppend to workerTable.csv
     with open("database/workerTable.csv", "a") as file:

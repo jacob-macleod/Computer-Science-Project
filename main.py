@@ -281,8 +281,12 @@ def makeWorker() :
                 ownerID = findValue(username, "database/owners.csv", 4, 1)
                 createWorker(workerUsername, firstName, lastName, password, ownerID)
 
+
+                usernames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 4)
+                firstNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 2)
+                lastNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 3)
                 # Return the configure devices page and clear the workerInputBoxCookie
-                configureDevices = make_response(render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), workers=findWorkersOwnedByOwner(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText))
+                configureDevices = make_response(render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText, usernames=usernames, firstNames=firstNames, lastNames=lastNames))
                 configureDevices.set_cookie("workerInputBoxText", ",,,,,")
                 return configureDevices
             else :
