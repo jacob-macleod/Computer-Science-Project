@@ -13,7 +13,7 @@ def applyChecksToUsername(username, allowedCharacters):
     if checkIfValueIsUsed(username, "database/owners.csv", 4) != "PASS":
         messageToReturn = "This username is already taken!"
         
-    if checkIfValueIsUsed(username, "database/workers.csv", 4) != "PASS":
+    if checkIfValueIsUsed(username, "database/workerTable.csv", 4) != "PASS":
         messageToReturn = "This username is already taken!"
 
     if checkForAllowedCharacters(username, allowedCharacters) != "PASS":

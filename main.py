@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, make_response
 from loginHandler import *
 from validateTextFields import *
 from searchDatabase import *
+from urllib.parse import unquote
 # Debug credentials: username = j, password = password123
 
 app = Flask('app', static_url_path='/static')
@@ -285,10 +286,9 @@ def makeWorker() :
                 usernames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 4)
                 firstNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 2)
                 lastNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 3)
-                # Return the configure devices page and clear the workerInputBoxCookie
-                configureDevices = make_response(render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText, usernames=usernames, firstNames=firstNames, lastNames=lastNames))
-                configureDevices.set_cookie("workerInputBoxText", ",,,,,")
-                return configureDevices
+                # Return the configure devices page
+                return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText, usernames=usernames, firstNames=firstNames, lastNames=lastNames)
+
             else :
                 return render_template("addWorker.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), firstNameFeedbackText=firstNameFeedbackText, lastNameFeedbackText=lastNameFeedbackText, usernameFeedbackText=usernameFeedbackText, passwordFeedbackText=passwordFeedbackText)
         else :
@@ -309,7 +309,7 @@ def removeWorker () :
 
             # Remove the worker
             workerUsername = request.args.get("workerUsername")
-            removeWorker(workerUsername)
+            deleteWorker(workerUsername)
             return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), usernames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 4), firstNames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 2), lastNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 3))
         else :
             return render_template("permissionError.html")

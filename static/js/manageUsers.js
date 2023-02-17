@@ -41,10 +41,13 @@ for (i=0;i<usernames.length;i++) {
     }
 }
 
+// Clear the workerInputBoxText cookie
+document.cookie = "workerInputBoxText=,,,,";
+
 // Remove the worker with the username equal to the name of the button
 function removeWorker() {
     workerUsername = event.target.name;
-    if (confirm("Are you sure you want to remove the '" + deviceName + "' datalogger?")) { 
+    if (confirm("Are you sure you want to remove the user '" + workerUsername + "'?")) { 
         window.open("/remove-worker?workerUsername=" + workerUsername, "_self");
     }
 }

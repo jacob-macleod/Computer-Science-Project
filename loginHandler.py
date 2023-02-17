@@ -115,7 +115,7 @@ def createWorker(username, firstName, lastName, password, ownerID) :
     with open("database/workerTable.csv", "a") as file:
         file.write(lineToAppend)
 
-def removeWorker (username) :
+def deleteWorker (username) :
     workerArr = []
 
     # Copy the data from workerTable to an array
