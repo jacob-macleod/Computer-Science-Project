@@ -114,3 +114,18 @@ def createWorker(username, firstName, lastName, password, ownerID) :
     # Append lineToAppend to workerTable.csv
     with open("database/workerTable.csv", "a") as file:
         file.write(lineToAppend)
+
+def removeWorker (username) :
+    workerArr = []
+
+    # Copy the data from workerTable to an array
+    with open("database/workerTable.csv", "r") as workerTable:
+        for line in workerTable:
+            # If the line contains data for the worker to be removed, do not copy it
+            if line != "" and decrypt(line.split(",")[4]) != username:
+                workerArr.append(line)
+
+    # Copy the data from the array to workersTable, overwriting it
+    with open("database/workerTable.csv", "w") as workerTable:
+        for i in range(0, len(workerArr)) :
+            workerTable.write(workerArr[i])
