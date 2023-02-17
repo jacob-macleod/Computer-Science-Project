@@ -296,6 +296,22 @@ def makeWorker() :
     else :
         return render_template("signIn.html")
 
+# Remove a worker
+@app.route("/remove-worker", methods=["POST", "GET"])
+def removeWorker () :
+    # If the user has logged in before
+    if (request.cookies.get("username") != None) :
+        isAdmin = False
+
+        # If the user is an admin
+        if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
+            isAdmin = True
+            return render_template("manageUsers.html", isAdmin=isAdmin, farmName=getFarmName(request.cookies.get("username")), usernames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 4), firstNames=findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 2), lastNames = findDetailsOfWorkersOwnedByOwner(request.cookies.get("username"), 3))
+        else :
+            return render_template("permissionError.html")
+    else :
+        return render_template("signIn.html")
+
 # Return the sign in image when requested
 @app.route("/signInImage")
 def signInImage():
