@@ -44,5 +44,7 @@ for (i=0;i<usernames.length;i++) {
 // Remove the worker with the username equal to the name of the button
 function removeWorker() {
     workerUsername = event.target.name;
-    alert (workerUsername);
+    if (confirm("Are you sure you want to remove the '" + deviceName + "' datalogger?")) { 
+        window.open("/remove-worker?workerUsername=" + workerUsername, "_self");
+    }
 }
