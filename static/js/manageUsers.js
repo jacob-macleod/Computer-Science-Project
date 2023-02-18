@@ -41,6 +41,12 @@ for (i=0;i<usernames.length;i++) {
     }
 }
 
+// If no user has been added
+if (usernames == "") {
+    document.getElementById("table").setAttribute("style", "display:none;");
+    document.getElementById("feedbackText").innerHTML = "You haven't added any workers yet"
+}
+
 // Clear the workerInputBoxText cookie
 document.cookie = "workerInputBoxText=,,,,";
 
