@@ -20,18 +20,30 @@ def generateID(fileToRead) :
     # The new user ID is 1 bigger than the highest ID used
     return highestID + 1
 
-# Search a file for a username. If found, look for the password belonging to the user. If found, return true, otherwise return false
-# Basically, check if the user entered credentials are correct
-def searchForCredentials(username, fileToSearch, rowToSearch, password) :
-    matchFound = False
 
-    with open(fileToSearch, 'r') as file:
+# Search owners.csv for the username and password. If the credentials match a row in the file, return True
+# Next, search workertable.csv in the same way, returning False if a match is found
+# If no match is found, return "FAIL". If a match is found, isAdmin in main.py can be set to the value indicated by the function
+# So, this file can return a boolean or a string. This is only possible in languages like python, but allows for simpler code
+def searchForCredentials(username, rowToSearch, password) :
+    matchFound = "FAIL"
+
+    with open("database/owners.csv", 'r') as file:
         for line in file:
             # If the username is correct
             if decrypt(line.split(",")[rowToSearch]) == username:
                 # If the password is correct
                 if decrypt(line.split(",")[5]) == password :
                     matchFound = True
+                    
+    with open("database/workerTable.csv", 'r') as file:
+        for line in file:
+            # If the username is correct
+            if decrypt(line.split(",")[rowToSearch]) == username:
+                # If the password is correct
+                if decrypt(line.split(",")[5]) == password :
+                    matchFound = False
+
 
 
     return matchFound
@@ -129,3 +141,17 @@ def deleteWorker (username) :
     with open("database/workerTable.csv", "w") as workerTable:
         for i in range(0, len(workerArr)) :
             workerTable.write(workerArr[i])
+            
+
+# If the user is an admin, return the username given
+# If the user is a worker, return the username of the owner of the user
+def findOwnerUsername (isAdmin, username) :
+    if isAdmin == True:
+        ownerUsername = username
+        # If the user is not an admin
+    elif isAdmin == False :
+        # Find the owner ID of the worker
+        ownerID = findValue(username, "database/workerTable.csv", 4, 1)
+        # Find the username of the owner ID
+        ownerUsername = findValue(ownerID, "database/owners.csv", 0, 4)
+    return ownerUsername

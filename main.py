@@ -23,11 +23,17 @@ def dashboard():
         # Sign in stage, no validation or verification checks need to be undertaken
 
         # If the username and passwords match the stored records:
-        if searchForCredentials(username, "database/owners.csv", 4, password) == True:
+        loginStatus = searchForCredentials(username, 4, password) 
+        if loginStatus != "FAIL":
             # Log the user in
             # Store username as a cookie and load the dashboard page
-            isAdmin = True
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(username)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(username)), labels=generateLabelsForToday(getFarmID(username))))
+            isAdmin = loginStatus
+
+            # If the user is an admin, ownerUsername = username
+            # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
+            ownerUsername = findOwnerUsername(isAdmin, username)
+
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers=findDataloggersOwnedByFarmID(getFarmID(ownerUsername)),  labels=generateLabelsForToday(getFarmID(ownerUsername))))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
