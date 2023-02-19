@@ -45,8 +45,13 @@ def dashboard():
         # If the user is the admin
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
+
+
+        # If the user is an admin, ownerUsername = username
+        # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
+        ownerUsername = findOwnerUsername(isAdmin, request.cookies.get("username"))
         # Load dashboard page
-        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=loadDataForCurrentDay(getFarmID(request.cookies.get("username"))), dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), labels=generateLabelsForToday(getFarmID(request.cookies.get("username"))))
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(ownerUsername), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(ownerUsername)), labels=generateLabelsForToday(getFarmID(ownerUsername)))
     else:
         # If user is not logged in then load sign in page
         return render_template("signIn.html", passwordFeedbackText=passwordFeedbackText)
