@@ -105,7 +105,11 @@ def getDay () :
 
         labels = generateLabels(day, day, dataloggerID)
 
-        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), labels=labels)
+        # If the user is an admin, ownerUsername = username
+        # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
+        ownerUsername = findOwnerUsername(isAdmin, request.cookies.get("username"))
+
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(request.cookies.get("username")), data=data, dataloggers = findDataloggersOwnedByFarmID(getFarmID(ownerUsername)), labels=labels)
     else :
         # If the user is not logged in load the sign in page
         return render_template("signIn.html")
