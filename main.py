@@ -83,7 +83,11 @@ def advancedSettings () :
 
             data = getDataForTimePeriod (dataloggerID, category, startDate, endDate)
             
-        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(request.cookies.get("username"))), data=data, labels=labels)
+        # If the user is an admin, ownerUsername = username
+        # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
+        ownerUsername = findOwnerUsername(isAdmin, request.cookies.get("username"))
+
+        return render_template("advancedSettings.html", farmName=getFarmName(request.cookies.get("username")), isAdmin=isAdmin, dataloggers = findDataloggersOwnedByFarmID(getFarmID(ownerUsername)), data=data, labels=labels)
     else :
         # If the user is not logged in load the sign in page
         return render_template("signIn.html")
