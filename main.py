@@ -33,7 +33,12 @@ def dashboard():
             # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
             ownerUsername = findOwnerUsername(isAdmin, username)
 
-            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(username, "database/owners.csv", 4, 2), farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers=findDataloggersOwnedByFarmID(getFarmID(ownerUsername)),  labels=generateLabelsForToday(getFarmID(ownerUsername))))
+            # Find the correct firstName by searching in the correct file depending on whether the user is a worker or an admin
+            firstName = findValue(username, "database/owners.csv", 4, 2)
+            if firstName == "" :
+                firstName = findValue(username, "database/workerTable.csv", 4, 2)
+
+            dashboard = make_response(render_template("dashboard.html", isAdmin=isAdmin, firstName=firstName, farmName=getFarmName(username), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers=findDataloggersOwnedByFarmID(getFarmID(ownerUsername)),  labels=generateLabelsForToday(getFarmID(ownerUsername))))
             dashboard.set_cookie('username', username)
             passwordFeedbackText = ""
             return dashboard
@@ -46,12 +51,16 @@ def dashboard():
         if checkIfValueIsUsed(request.cookies.get("username"), "database/owners.csv", 4) == "FAIL":
             isAdmin = True
 
+        # Find the correct firstName by searching in the correct file depending on whether the user is a worker or an admin
+        firstName = findValue(request.cookies.get("username"), "database/owners.csv", 4, 2)
+        if firstName == "" :
+            firstName = findValue(request.cookies.get("username"), "database/workerTable.csv", 4, 2)
 
         # If the user is an admin, ownerUsername = username
         # if the user is not an admin, ownerUsername = the username of the owner of the user currently logging in
         ownerUsername = findOwnerUsername(isAdmin, request.cookies.get("username"))
         # Load dashboard page
-        return render_template("dashboard.html", isAdmin=isAdmin, firstName=findValue(request.cookies.get("username"), "database/owners.csv", 4, 2), farmName=getFarmName(ownerUsername), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(ownerUsername)), labels=generateLabelsForToday(getFarmID(ownerUsername)))
+        return render_template("dashboard.html", isAdmin=isAdmin, firstName=firstName, farmName=getFarmName(ownerUsername), data=loadDataForCurrentDay(getFarmID(ownerUsername)), dataloggers = findDataloggersOwnedByFarmID(getFarmID(ownerUsername)), labels=generateLabelsForToday(getFarmID(ownerUsername)))
     else:
         # If user is not logged in then load sign in page
         return render_template("signIn.html", passwordFeedbackText=passwordFeedbackText)
