@@ -81,3 +81,17 @@ if (data != "") {
     document.getElementById("graphContainer").style.display = "none";   
     document.getElementById("feedbackText").innerHTML = "Sorry, no data was found for the selected day. Consider changing the day selected to view more data"
 }
+
+if (dataloggers.length == 0) {
+    document.getElementById("feedbackText").innerHTML = "Sorry, you haven't added any dataloggers. Consider adding dataloggers in the configure devices page"
+    document.getElementById("graphContainer").style.display = "none"; 
+    document.getElementsByName("normalText")[0].style.display = "none";
+    document.getElementsByName("normalText")[1].style.display = "none";
+    document.getElementsByName("normalText")[2].style.display = "none";
+    document.getElementsByName("normalText")[3].style.display = "none";
+    document.getElementById("categorySelector").style.display = "none";
+    document.getElementById("startDateSelector").style.display = "none";
+    document.getElementById("endDateSelector").style.display = "none";
+    document.getElementById("button").style.display = "none";
+    document.getElementById("dataloggerSelector").style.display = "none";
+}
