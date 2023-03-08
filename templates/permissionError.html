@@ -45,8 +45,44 @@
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/static/sharedFunctions.js"></script>
 <script>
     // Set up the functionality for the hamburger menu
-    hamburgerMenu();
+        // Get the icon for the hamburger menu
+        icon = document.getElementById("hamburgerIcon");
+
+        // When the icon is clicked
+        icon.addEventListener("click", () => {
+            // Switch the image that it displays to the image
+            // Either "Hamburger.svg" or "close.svg" is shown
+            if (icon.getAttribute("src") == "static/img/Hamburger.svg") {
+                icon.setAttribute("src", "static/img/close.svg");
+                document.getElementById("menuItems").style.display = "grid";
+            } else {
+                icon.setAttribute("src", "static/img/Hamburger.svg")
+                document.getElementById("menuItems").setAttribute("style", "display:none;")
+            }
+        });
+
+    // Logout the user
+function logout() {
+    // Delete all cookies and load the / page. Since there are no cookies the sign in page will load
+    deleteCookies();
+    window.open("/", "_self");
+}
+
+// Delete all cookies
+function deleteCookies() {
+    // Get all the cookies
+    var cookies = document.cookie.split(";");
+
+    // For every cookie, edit it to make it expire
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var value = cookie.indexOf("=");
+        var name = value > -1 ? cookie.substr(0, value) : cookie;
+        // To delete it, make it so it's already expired
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 </script>
+<script src="/static/sharedFunctions.js"></script>
