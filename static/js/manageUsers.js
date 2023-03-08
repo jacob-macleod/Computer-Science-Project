@@ -41,6 +41,8 @@ for (i=0;i<usernames.length;i++) {
     }
 }
 
+hamburgerMenu();
+
 // If no user has been added
 if (usernames == "") {
     document.getElementById("table").setAttribute("style", "display:none;");

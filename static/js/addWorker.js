@@ -27,6 +27,8 @@ if (getCookie(" workerInputBoxText") == undefined) {
      }
 }
 
+hamburgerMenu();
+
 // When an input box is clicked
 function onInputBoxClick () {
     inputBoxText = "";
